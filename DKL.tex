@@ -1,0 +1,262 @@
+% Created 2021-01-06 Wed 10:53
+% Intended LaTeX compiler: pdflatex
+\documentclass[journal, oneside, twocolumn]{IEEEtran}
+% \documentclass[12pt, draftclsenofoot, oneside, onecolumn]{IEEEtran}
+\usepackage{cite}
+\usepackage[pdftex]{graphicx}
+\graphicspath{./image/}
+\DeclareGraphicsExtensions{.pdf, .jpeg, .png}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage[caption=false, font=footnotesize]{subfig}
+\usepackage[colorlinks=true, linkcolor=blue]{hyperref}
+\usepackage{hyperref}
+\usepackage{multirow}
+\usepackage{bbm}
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+% page-break permission for equation: 0 :yes  10000:no  other:yes but let latex find someother way
+\interdisplaylinepenalty=2500
+
+% fix hyperlink to invisible equation number
+\makeatletter
+\def\IEEElabelanchoreqn#1{\bgroup
+\def\@currentlabel{\p@equation\theequation}\relax
+\def\@currentHref{\@IEEEtheHrefequation}\label{#1}\relax
+\Hy@raisedlink{\hyper@anchorstart{\@currentHref}}\relax
+\Hy@raisedlink{\hyper@anchorend}\egroup}
+\makeatother
+\newcommand{\subnumberinglabel}[1]{\IEEEyesnumber
+\IEEEyessubnumber*\IEEElabelanchoreqn{#1}}
+
+% fix font behavior of IEEEeqnarray
+\renewcommand{\theequationdis}{{\normalfont (\theequation)}} 
+\renewcommand{\theIEEEsubequationdis}{{\normalfont (\theIEEEsubequation)}} 
+
+% fix distance between f and ()
+\usepackage{mleftright}
+\mleftright
+
+% fix ()paris in different line same size
+\newcommand{\sizecorr}[1]{\makebox[0cm]{\phantom{$\displaystyle #1$}}}
+
+% argmin argmax
+\DeclareMathOperator*{\argminA}{arg\,min}
+\DeclareMathOperator*{\argminB}{argmin}
+\DeclareMathOperator*{\argmaxA}{arg\,max}
+\DeclareMathOperator*{\argmaxB}{argmax}
+
+\DeclareMathOperator{\tr}{Tr}
+
+% fix d in integration
+\newcommand{\dd}{\mathop{}\!\mathrm{d}}
+
+\date{}
+
+\title{Spatial Spectrum Inference with Deep Kernel Learning}
+\hypersetup{
+pdfauthor={Yi-Qun Xu},
+pdftitle={},
+pdfkeywords={},
+pdfsubject={},
+pdfcreator={vscode}, 
+pdflang={English}}
+
+\begin{document}
+
+\author{
+Yi-Qun~Xu,
+Daoxing~Guo,%~\IEEEmembership{Member,~IEEE,}
+Bangning~Zhang,%~\IEEEmembership{Life~Fellow,~IEEE}
+
+%\thanks{This work was supported in part by the National Natural Science Foundation of China under Grant 61901502 and Research Project of NUDT under grant ZK18-02-11.\emph{(Corresponding author: Bangning~Zhang.)}}
+%\thanks{Y.-Q. Xu, B. Zhang, G. Ding, and D. Guo are with the College of Communications Engineering, Army Engineering University, Nanjing 210000, China (e-mail: yi-qun.xu@foxmai.com; AEU\_zbn@163.com; dr.guoru.ding@ieee.org; xyzgfg@sina.com).}
+%\thanks{Manuscript received April 19, 2020; revised August 26, 2020.}
+}
+
+%\markboth{}{}
+%\IEEEspecialpapernotice{(Invited Paper)}
+
+\maketitle
+
+
+\begin{abstract}
+
+\end{abstract}
+
+
+\begin{IEEEkeywords}
+spectrum inference, Gaussian process, deep kernel learning, 
+\end{IEEEkeywords}
+
+\section{Introduction}
+\IEEEPARstart{C}{rowdsourced} spectrum sensing (CSS), which is to recruit private mobile commnication terminals to perform spectrum sensing, has received a great deal of research attentions \cite{Ding2014, Jin2018, Han2019, Hu2020, Amin2020} in recent years. Billions of mobile devices can garrantee the geographical coverage especially in urban area. To make use of the big data collected by the CSS system, . One of the most stirring application is for spectrum inference. Spectrum inference is a generalization of spectrum prediction from time dimension to space and frequence dimensions, which is an promissing technique for capturing the relavant information of radio frequence from measurement data.\cite{Ding2018}. Radio environment map (REM) 
+
+
+
+The space dimension spectrum inference problem which is called radio enviroment map construction in many research papers,has different names in differenc research papers. The two most common ones are radio environment map (REM) construction \cite{Phillips2012, Pesko2014, Sato2017, Li2018, Katagiri2020}  
+
+Various aspects of REM were strudied in \cite{Li2018}. They summuarized the main construction methods of REM including kriging, nearest neighbour, inverse distance weighted, trend surface, thin plant spines, discrete smooth interpolation and joint tensor completion. 
+
+In \cite{Xu2021}, they propsed a bayesian hierachical model based method for REM construction, which take the correlation of shadow fading into consideration. Howerver, the premise assumption of their researh is 
+% 传统的REM方法 
+% kring和分层贝叶斯模型都是基于假设：研究区域内的环境没有大的变化，具有平稳性和各向同性，而实际情况不符。
+data driven method : accuracy is not good
+
+spatial statisitcal method base on assumptions of heterogenious of space field. 
+In this letter, we will focus on the space dimension of spectrum inference.
+
+% ！现有研究进展
+
+% !概括本文内容
+In this letter, we propose a deep kernel learning based spatial spectrum inference method in complex environment. Leverage the power of deep nural network, we improve the expressivability of gaussian process regression model.
+
+as a spatial regression task.
+% !贡献和意义
+To the best of our knowledge, this is the first 
+The remainder of the letter is as follows: After the system model in Section II, the deep kernal learning method for radio environment map is considered in Section III. Subsequently, the simulation results and conluding remarks are expressed in Section IV and V.
+
+
+
+\section{System Model and Problem Statement}
+
+In this letter, we consider an area of intrest in 2D space. A s shown in Fig. \ref{}, measurements of $N$ crowdsouce sensors are reported to the fusion center with its location and receive signal strength (RSS). 
+From the propagation model, the RSS can be represented as:
+
+In , they model the shodow fading component as a isotropic stationary gaussian process. However, the shadow fading is affected by the obstacals in the area, which is heterogenious and nonstationary.
+\section{Deep Kernel Learning Based Spatial Inference}
+
+Gaussian process(GP) as a powerful tool in the machine leaning toobox has been extensively studied in recent years\cite{Damianou2013, Wilson2013,Duvenaud2014a,Salimbeni2017a, Lee2018,Wilson2019}. GP is suitable for complex regression tasks due to it's flexibility on incorporate prior knowledge. Furthermore, GP which is a probabilistic approach allows us to incorporate the confidence of the prediction into the regression result.
+In this section, we first introduce some backgroud on GPs and the deep kernel leaning method,  
+
+
+\subsection{Backgroud on Gaussian Process}
+
+A Gaussian process is a collection of random variables, any finite number of which have a joint Gaussian distribution. For a regression problem $y=f(x)+ \epsilon$ where $x\in\mathbf{R}^D$ and  $\epsilon \sim \mathcal{N}(0, \sigma_n^2)$ is independent identical distributed(IID) Gaussian measurement noise, GP method assume the unknown function $f$ follow a $\mathcal{GP}(\mu(\cdot), k(\cdot, \cdot))$, where $\mu(\cdot)$ is the mean function and $k(\cdot, \cdot)$ is the covariance function which is also called the kernel function.
+
+For traning inputs $\mathbf{X}=[x_1, x_2, \dots, x_n]^ T$ and correspoingding noisy traning targets $\mathbf{y}=[y_1, y_2, \dots, y_n]^T$, to predict the function values $f_*$ at the test points $x_*$, the joint distribution of traning points and predict targets can be expressed as:
+
+\begin{IEEEeqnarray}{c}
+  \left[ \begin{matrix} \mathbf{y} \\ f_* \end{matrix} \right]  \sim  
+\mathcal{N} \left(\left[\begin{matrix} \mu_{f}\\ 
+\mu_{*} \end{matrix} \right], 
+\left[ \begin{matrix} K_{ff}+ \sigma_{n}^{2}I & K_{f*} \\ K_{*f} & K_{**}\end{matrix} \right]  \right)
+\end{IEEEeqnarray}
+where the mean vector and the covariance matrix can be computed with the mean and kernel function of the GP:
+
+\begin{IEEEeqnarray}{rCl}
+  \mu_i  & = & \mu(x_i) \\
+  \noalign{\noindent \vspace{1\jot}}
+  K_{ij} & = & k(x_i, x_j)
+\end{IEEEeqnarray}
+
+We obtain the predictive distribution at point $x_*$ as:
+
+\begin{IEEEeqnarray}{rCl}
+  p\left( f_* \middle| \mathbf{X}, \mathbf{y}, x_* \right) & = & \mathcal{N}\left( f_* \middle| \mu_*, \sigma_*^2 \right)  
+\end{IEEEeqnarray}
+
+where:
+
+\begin{IEEEeqnarray}{rCl}
+  \mu_* & = & \mu(x_*) + k(x_*, \mathbf{X})\left[k(\mathbf{X}, \mathbf{X}) + \sigma_N^2 \mathbf{I})^{-1}(\mathbf{y} - \mu(X)\right] \IEEEeqnarraynumspace  \\*
+  \noalign{\noindent \vspace{1\jot}}
+  \sigma_*^2 & = & k(x_*, x_*) - k(x_*, \mathbf{X}) \left[k(\mathbf{X}, \mathbf{X}) + \sigma_N^2 \mathbf{I})^{-1}k(\mathbf{X}, x_*)\right] \IEEEeqnarraynumspace  
+\end{IEEEeqnarray}
+
+In GP regression(GPR) method the mean function $\mu(\cdot)$ is often assumed to be $0$. The GP is trained by maxmize the marginal likelihood with respect to GP hyperparameters. The marginal likelihood is given by:
+
+\begin{IEEEeqnarray}{rCl}
+  p\left(\mathbf{y} | \mathbf{X}, \theta \right) & = & \int p\left( \mathbf{y} | f, \mathbf{X} \right) p(f | \mathbf{X}) \dd f  \IEEEnonumber \\*
+  & = & \int \mathcal{N}\left(\mathbf{y} \middle| f(\mathbf{X}), \sigma_{n}^{2} \mathbf{I}\right) \mathcal{N}\left(f(\mathbf{X}) \middle| \mathbf{0}, \mathbf{K} \right) \dd f(\mathbf{X})   \IEEEnonumber \\*
+  & = & \mathcal{N} ( \mathbf{y} | \mathbf{0}, \mathbf{K} + \sigma_n^{2} \mathbf{I} )
+\end{IEEEeqnarray}
+
+where $\mathbf{K}$ is the kernel matrix with $\mathbf{K}_{ij} = k(x_i, x_j)$ , $\mathbf{X}$ are training inputs, $\mathbf{y}$ are training targets. Therefore, the negative log marginal likelihood (NLML) is:
+\begin{IEEEeqnarray}{rCl}
+  \IEEEyesnumber
+  \mathcal{L}(\theta) & = & - \text{log} p(\mathbf{y} | \mathbf{X}, \theta) \IEEEnonumber \\
+& = & \frac{1}{2}\mathbf{y}^T \Sigma_\theta^{-1}\mathbf{y} + \frac{1}{2}\text{log}(\text{det}\Sigma_\theta) + \frac{n}{2}\text{log}2\pi 
+\end{IEEEeqnarray}
+where:
+
+\begin{IEEEeqnarray}{rCl}
+  \IEEEyesnumber
+  \Sigma_\theta & := & \mathbf{K} + \sigma_n^2 \mathbf{I} 
+\end{IEEEeqnarray}
+
+The GP training is formulated as an optimization problem:
+\begin{IEEEeqnarray}{rCl}
+  \IEEEyesnumber
+ \hat{\theta} & = & \argminB_{\theta} {\mathcal{L}(\theta)}  
+\end{IEEEeqnarray}
+which is a non-convex problem. In practice, the gradient-based optimization algorithms are used to find the optimum of NLML.
+
+\subsection{Deep Kernel Learning}
+Acturally, the kernel function $k(\cdot, \cdot)$ of GPs encodes strctural assumptions about the class of functions we wish to model, which correspoding to the ``inductive bias'' of the learning method. In this sense, the prior knowledge about the model can be embeded into GP through the kernel function.
+There are many base kernels such as linear kernel, RBF kernel, periodic kernel, matern kernel, and spectral mixtrue kernel. Each kernel function corresponds to a different set of assumptions made about the function we wish to model \cite{Duvenaud2014a}. For example, linear kernel implies a linear function, and a periodic kernel implies function with repeating structure \cite{Wilson2013}. The design and choice of kernel has a profund impact on the performance of GPR model.
+
+Deep kernel learning proposed by Wilson \cite{Wilson2019} encapsulate the expressive power of deep architectures into GP. Specifically, deep kernel learning starts from a base kernel $k(x_i, x_j |  \mathbf{\theta})$ with hyperparameters $\mathbf{\theta}$, and then transform the inputs $x$ with a non-linear mapping $g(x;\mathbf{w})$ parametrized by weights $\mathbf{w}$:
+  
+\begin{IEEEeqnarray}{rCl}
+  k(x_i, x_j | \mathbf{\theta}) & \rightarrow & k( g(x_i, \mathbf{w}), g(x_j, \mathbf{w}) |  \mathbf{\theta}, \mathbf{w})
+\end{IEEEeqnarray}
+
+The deep kernel incresses the expressivability of GP significantly.   
+
+To introduce non-stationarity, we follow . First, a deep neural network is used to introduce an non-linear mapping $u(x)$ of the input $x$. And then we use a stationary convariance function in $u$-space.
+
+\subsection{Deep kernel learning for Spatial Spectrum Inference}
+To model a nonstationary and anisotropic covariace structure
+
+\section{Numerical Results}
+Here, we will evaluate the performance of the proposed algorithm with the CRAWDAD cu/wimax dataset \cite{Ton2012}, which was also used in \cite{Phillips2012} and \cite{Hu2020}. The cu/wimax dataset was collected at the University of Colorado Boulder. It contains careful point measurements of the Wimax network serving the campus. We investigate the ``first phase'' sample, which were taken on a 100m equalateral triangular lattice. 
+
+
+
+
+
+\section{}
+\subsection{}
+
+
+\ifCLASSOPTIONcaptionsoff
+\newpage
+\fi
+
+\bibliographystyle{./bibtex/myIEEEtran.bst}
+\bibliography{./bibtex/library}
+
+%------------------------------------------------------------------------------------------------
+% \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{../author/Author_Yi-Qun_Xu}}]{Yi-Qun~Xu}
+%   received the B.S. and M.S. degrees in information and communication
+%   engineering from the PLA University of Science and Technology, Nanjing, China,
+%   in 2005 and 2010, respectively. He is currently pursuing the Ph.D. degree with
+%   Army Engineering University, Nanjing, China.
+
+%   His current research interests include cognitive radio, spectrum sensing,
+%   spatial-temporal data analysis, big data analysis, and machine learning.
+%   \end{IEEEbiography}
+
+%   \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{../author/Author_Bangning_Zhang}}]{Bangning~Zhang}
+%   received the B.S. and M.S. degrees from the Institute of Communications Engineering, Nanjing, China, in 1984 and 1987, respectively. His current research interests include microwave technologies, satellite communication systems, communication anti-jamming technologies, and physical layer security.
+%   \end{IEEEbiography}
+
+%   \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{../author/Author_Guoru_Ding}}]{Guoru~Ding}
+%   (S'10-M'14-SM'16) is currently an Associate Professor with the College of Communications Engineering, Nanjing, China. He received the B.S. (Hons.) degree in electrical engineering from Xidian University, Xi'an, China, in 2008, and the Ph.D. (Hons.) degree in communications and information systems from the College of Communications Engineering, Nanjing, China, in 2014. From 2015 to 2018, he was a Post-Doctoral Research Associate with the National Mobile Communications Research Laboratory, Southeast University, Nanjing, China. His research interests include cognitive radio networks, massive MIMO, machine learning, and data analytics over wireless networks.
+
+%   He has received the Excellent Doctoral Thesis Award of the China Institute of Communications in 2016, the Alexander von Humboldt Fellowship in 2017, the Excellent Young Scientist of Wuwenjun Artificial Intelligence in 2018, and the 14th IEEE COMSOC Aisa-Pacific Outstanding Young Researcher Award in 2019. He was a recipient of the Natural Science Foundation for Distinguished Young Scholars of Jiangsu Province, China and six best paper awards from international conferences such as the IEEE VTC-FALL 2014. He has served as a Guest Editor for the IEEE JOURNAL ON SELECTED AREAS IN COMMUNICATIONS (special issue on spectrum sharing and aggregation in future wireless networks). He is currently an Associate Editor of the IEEE TRANSACTIONS ON COGNITIVE COMMUNICATIONS AND NETWORKING, an Editor of CHINA COMMUNICATIONS and a Technical Editor of the IEEE 1900.6 Standard Association Working Group.
+%   \end{IEEEbiography}
+
+%   \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{../author/Author_Bing_Zhao}}]{Bing~Zhao}
+%   received the B.S. degree and M.S. degree from Nanjing University of Science and Technology (NJUST), Nanjing, China, in 2007 and 2009, respectively. She is currently a full lecturer with Army Engineering University of PLA. She has been granted over 10 patents in her research areas. Her current research interests include satellite communications systems and transmission technologies.
+%   \end{IEEEbiography}
+
+%   \begin{IEEEbiographynophoto}{Shengnan~Li}
+%   received the B.S. degree from the Changsha University of Science and Technology, Changsha, China, in 2014, and the M.S. degree from the PLA University of Science and Technology, Nanjing, in 2017. Her research interests focus on spectrum sensing, satellite communications, and communication anti-jamming technologies.
+%   \end{IEEEbiographynophoto}
+
+%   \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{../author/Author_Daoxing_Guo}}]{Daoxing~Guo}
+%   received the B.S., M.S., and Ph.D. degrees from the Institute of Communications Engineering, Nanjing, China, in 1995, 1999, and 2002, respectively. His current research interests include satellite communication systems and transmission technologies, communication anti-jamming technologies, and communication anti-interception technologies.
+%   \end{IEEEbiography}
+\end{document}

@@ -1,0 +1,17 @@
+.vscode/
+.DS_Store
+author/
+__latexindent_temp.tex
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.eps
+*.gz
+*.bak
+*.pdf
+!/images/*.pdf
+.directory
