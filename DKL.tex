@@ -100,15 +100,15 @@ In \cite{Xu2021}, they proposed a Bayesian hierarchical model-based method for R
 
 data-driven method: accuracy is not good
 
-spatial statistical method base on assumptions of heterogeneous of space field.
-In this letter, we will focus on the space dimension of spectrum inference.
+% spatial statistical method base on assumptions of heterogeneous of space field.
+In this letter, we focus on the space dimension of spectrum inference.
 
 % !现有研究进展
 
 % !概括本文内容
-In this letter, we propose a deep kernel learning based spatial spectrum inference method for heterogeneous environment. Specifically, we model the shadow fading effect as an anisotropic and nonstationary Gaussian process. This model is flexible and consistent with the actual situation. And by leveraging the power of deep neural network, we improve the expressive ability of Gaussian process regression (GPR) model. To the best of our knowledge, this is the first attempt to introduce GPs to spatial spectrum inference.
+In this letter, we propose a deep kernel learning-based spatial spectrum inference method for heterogeneous environments. Specifically, we model the shadow fading effect as an anisotropic and nonstationary Gaussian process. This model is flexible and consistent with the actual situation. And by leveraging the power of the deep neural network, we improve the expressive ability of the Gaussian process regression (GPR) model. To the best of our knowledge, this is the first attempt to introduce GPs to spatial spectrum inference.
 
-The remainder of the letter is as follows: After the system model in Section II, the deep kernel learning method for radio environment map is considered in Section III. Subsequently, the simulation results and concluding remarks are expressed in Section IV and V.
+The remainder of the letter is as follows: After the system model in Section~II, the deep kernel learning method for radio environment map is considered in Section~III. Subsequently, the simulation results and concluding remarks are expressed in Section~IV and Section~V.
 
 
 
@@ -123,7 +123,7 @@ From the propagation model, the RSS of the $j$-th sensor can be represented as:
 \end{IEEEeqnarray}
 where $P_t$ is the transmitted power,  $d_0$ is a reference distance, $\lambda$ is the wavelength of radiation, $\eta$ is the free-space path loss exponent, $L_t$ is the location of the transmitter, $l_j$ is the location of the $j$-th sensor, $S_{j}$ is the shadowing component from the transmitter to $j$-th sensor, and $N_j$ is the measurement error caused by crowd-source sensor. 
 
-The main task for spatial inference is to obtain the RSS where there is no crowd-sourced sensor and further draw the REM of the area of interest. From Eq.~\eqref{equ:propagation_model}, the RSS can be decomposed into three parts: the free-path loss component, the shadowing component, and the measurement error. The free-path loss component can be calculated with the link budget. The difficulty for spatial inference is caused by the shadowing component $S_j$\cite{Xu2021}. In radio communication systems, shadowing is a random phenomenon, which is typically modeled by a log-normal distribution\cite{Cho2010}. Moreover, the spatial correlation of shadowing has been studied systematically\cite{Agrawal2009, Gudmundson1991}, and used in REM construction to improve the inference accuracy\cite{Han2019, Sato2017, Xu2021}. However, in previous studies, the shadowing component is treated as an isotropic stationary process. It's a strong assumption that simplifies reality dramatically. The shadowing is affected by the obstacles in the environment. In most cases, the obstacles are not evenly distributed. Therefore, due to the heterogeneity of the environment, the shadowing component should be modeled as an anisotropic and nonstationary process. This attribute of shadowing increases the challenge for spatial spectrum inference. 
+The main task for spatial inference is to obtain the RSS where there is no crowd-sourced sensor and further draw the REM of the area of interest. From Eq.~\eqref{equ:propagation_model}, the RSS can be decomposed into three parts: the free-path loss component, the shadowing component, and the measurement error. The free-path loss component can be calculated with the link budget. The difficulty for spatial inference is caused by the shadowing component $S_j$\cite{Xu2021}. In radio communication systems, shadowing is a random phenomenon, which is typically modeled by a log-normal distribution\cite{Cho2010}. Moreover, the spatial correlation of shadowing has been studied systematically\cite{Agrawal2009, Gudmundson1991} and used in REM construction to improve the inference accuracy\cite{Han2019, Sato2017, Xu2021}. However, in previous studies, the shadowing component is treated as an isotropic stationary process. It's a strong assumption that simplifies reality dramatically. The shadowing is affected by the obstacles in the environment. In most cases, the obstacles are not evenly distributed. Therefore, due to the heterogeneity of the environment, the shadowing component should be modeled as an anisotropic and nonstationary process. This attribute of shadowing increases the challenge for spatial spectrum inference. 
 
 Our study aims to characterize the heterogeneity of the environment to improve the accuracy of spatial spectrum inference.
 
@@ -187,19 +187,27 @@ which is a non-convex problem. In practice, the gradient-based optimization algo
 \subsection{Deep Kernel Learning}
 The kernel function $k(\cdot, \cdot)$ of GPs encodes structural assumptions about the class of functions we wish to model, which corresponding to the ``inductive bias'' of the learning method. In this sense, the prior knowledge about the model can be embedded into GP through the kernel function. There are many base kernels such as linear kernel, RBF kernel, periodic kernel, Matérn kernel, and spectral mixture kernel\cite{Wilson2013}. Each kernel function corresponds to a different set of assumptions made about the function we wish to model \cite{Duvenaud2014a}. For example, the linear kernel implies a linear function, and the periodic kernel implies a function with repeating structure \cite{Wilson2013}. The design and choice of the kernel have a profound impact on the performance of the GPR model.
 
-DKL proposed by Wilson \cite{Wilson2019} encapsulate the expressive power of deep architectures into GP. Specifically, deep kernel learning starts from a base kernel $k(x_i, x_j |  \mathbf{\theta})$ with parameters $\mathbf{\theta}$, and then transform the inputs $x$ with a deep neuron network $g(x;\mathbf{w})$ parameterized by weights $\mathbf{w}$:
+DKL proposed by Wilson \cite{Wilson2019} encapsulate the expressive power of deep architectures into GP. Specifically, deep kernel learning starts from a base kernel $k(x_i, x_j |  \mathbf{\theta})$ with parameters $\mathbf{\theta}$, and then transform the inputs $x$ with a deep neural network (DNN) $g(x;\mathbf{w})$ parameterized by weights $\mathbf{w}$:
 \begin{IEEEeqnarray}{rCl}
   k(x_i, x_j | \mathbf{\theta}) & \rightarrow & k( g(x_i, \mathbf{w}), g(x_j, \mathbf{w}) |  \mathbf{\theta}, \mathbf{w})
 \end{IEEEeqnarray}
+The deep kernel increases the expressive ability of GP significantly. DKL views the resulting kernel as a scalable deep kernel and provides the ability to automatic learning of the kernel through GP marginal likelihood. 
 
-The deep kernel increases the expressive ability of GP significantly. However, it has been proved that the DKL is not stable, as the GP will use the flexibility of the deep neuron network to try to correlate all input points \cite{Ober2021}. 
+However, it has been proved that, in some cases, the DKL is not stable, as the GP will use the flexibility of the DNN to try to correlate all inputs. Meanwhile, the DNN in DKL is prone to overfitting\cite{Ober2021}. 
 
 
 \subsection{Transformed Kernel Learning}
-One way to introduce non-stationarity is to introduce an arbitrary non-linear transformation $f(x)$ which map the input $x$ in space $D$ to a new space $D^\prime$, and then use a stationary covariance function in space $D^\prime$\cite{Rasmussen2006}. 
-Inspired by the DKL method, we designed th
-To model a nonstationary and anisotropic covariance structure. A nonlinear injective function $f$ can be used to mapping the space $D$ which is nonstationary and  anisotropic to a new space $D1$. 
-We composite few simply nonlinear injective mapping to increase the representability of kernels. For purpose, the hyper-parameter values are chosen during design, the weight parameters are to be learned during learning procdural.
+One way to introduce nonstationarity in GP is to introduce an arbitrary non-linear transformation $f(x)$ which map the input $x$ in space $D$ to a new space $D^\prime$, and then use a stationary covariance function in space $D^\prime$\cite{Rasmussen2006}. In DKL the DNN can be viewed as a nonlinear function that transforms the inputs. And the transformation is characterized by the weights parameter of the DNN. However, the inputs of spatial spectrum inference are the locations of crowd-sourced sensors. The input space is the actual physical space. DNN transformation of the input space causes the spatial folding effect, which is inconsistent with the meaning of the physical quantity studied. Therefore, the spatial folding effect and the pitfalls of DKL make it unsuitable for spatial spectrum inference.
+
+Inspired by the pros and cons of DKL, we should design a nonlinear transformation with the following properties:
+\begin{itemize}
+  \item The nonlinear transformation can be characterized by several parameters, which give it the flexibility to represent the anisotropy and nonstationarity.
+  \item The nonlinear transformation is an injective mapping and topological homeomorphous, which does not cause spatial folding effects.
+\end{itemize} 
+
+We design 3 kinds of simple nonlinear transformations. Each of them conforms to both properties above. By compositing these transformation units, we can construct a flexible nonlinear transformation to characterize the heterogeneity of the space of interest. 
+
+For the purpose of narrative, the values hyper-parameters which are represented with Greek alphabets $\alpha, \beta, \text{and } \gamma$ are chosen during design. The weight parameters, which are represented with $w$ and subscripts, are to be learned during model training procedural.
 
 \begin{figure}[!tb]
   \centering
