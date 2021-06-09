@@ -80,33 +80,30 @@ pdflang={English}}
 
 \maketitle
 
-
 \begin{abstract}
-data-driven method: accuracy is not goodIn this letter, we focus on the space dimension of spectruminference.In this letter, we propose a deep kernel learning-basedspatial spectrum inference method for heterogeneous envi-ronments. Specifically, we model the shadow fading effectas an anisotropic and nonstationary Gaussian process. Thismodel is flexible and consistent with the actual situation.And by leveraging the power of the deep neural network,we improve the expressive ability of the Gaussian processregression (GPR) model. To the best of our knowledge, this isthe first attempt to introduce GPs to spatial spectrum inference.
+Crowd-sourced spectrum sensing has gained tremendous attention in recent years. One of the data mining application is to make spatial spectrum inference (SSI) based on crowd-sourced sensor data. The resent research trend is to use spatial statistics for data interpolation. However, one of the powerful tool, Gaussian process, has never received much attention is deserves. And the environmental heterogeneity was not considered in papers on SSI. In this paper, we innovatively propose a transformed kernel learning (TKL) method for SSI based on GP. Meanwhile, we take environmental heterogeneity into consideration. To the best of our knowledge, its the first time that GP is introduced into SSI and the impact of environmental heterogeneity on SSI is discussed. The experimental results show a considerable improvement in root mean square error and continuous rank probability score compared to existing state-of-the-art SSI methods.
 \end{abstract}
 
-
 \begin{IEEEkeywords}
-  spectrum inference, Gaussian process, deep kernel learning,
+  spectrum inference, radio environment map, Gaussian process, deep kernel learning
 \end{IEEEkeywords}
 
 \section{Introduction}
 \IEEEPARstart{C}{rowd-sourced} spectrum sensing (CSS), which is to recruit private mobile communication terminals to perform spectrum sensing, has received much research attentions \cite{Ding2014, Jin2018, Han2019, Hu2020, Amin2020} in recent years. Billions of mobile devices can guarantee geographical coverage, especially in urban area. To make use of the big data collected by the CSS system, one of the most stirring application is for spectrum inference. Spectrum inference is a generalization of spectrum prediction from time dimension to space and frequency dimensions, which is a promising technique for capturing the relevant information of radio frequency from measurement data.\cite{Ding2018}.
 
-The spatial spectrum inference (SSI) is to get the receive signal strength (RSS), where there is no sensor device, from data collected by spatially distributed sensors. It is regarded as radio environment map (REM) construction method in many research papers\cite{Phillips2012, Pesko2014, Sato2017, Li2018, Han2019, Katagiri2020, Xu2021}. Various aspects of REM were studied in \cite{Li2018}. They summarized the main state-of-art construction methods of REM including Kriging, nearest neighbor (NN), inverse distance weighted nearest neighbor (IDWNN), trend surface, thin plant spines, discrete smooth interpolation and joint tensor completion. In \cite{Han2019}, the authors made a comparison between NN, IDWNN and the Kriging method. The Kriging algorithm has the best accuracy. In \cite{Xu2021}, they proposed a Bayesian hierarchical model-based method for REM construction, which take the correlation of shadow fading into consideration. 
+The spatial spectrum inference (SSI) is to get the receive signal strength (RSS), where there is no sensor device, from data collected by spatially distributed sensors. It is regarded as radio environment map (REM) construction method in many research papers\cite{Phillips2012, Pesko2014, Sato2017, Li2018, Han2019, Katagiri2020, Xu2021}. Various aspects of REM were studied in \cite{Li2018}. They summarized the main state-of-art construction methods of REM including Kriging, nearest neighbor (NN), inverse distance weighted nearest neighbor (IDWNN), trend surface, thin plant spines, discrete smooth interpolation and joint tensor completion. In \cite{Han2019}, the authors made a comparison between NN, IDWNN and the Kriging method. They argued that the Kriging algorithm has the best accuracy. In \cite{Xu2021}, they proposed a Bayesian hierarchical model-based method for REM construction, which take the correlation of shadow fading into consideration. 
 
-Recent researches show the potential of spatial statistics methods in the problem of SSI. However, another powerful tool in spatial statistics, the Gaussian process (GP), has never received attention it deserves in SSI. Essentially, SSI is a complex regression task. GP as a powerful tool in the machine learning toolbox \cite{Rasmussen2006} has been extensively studied in recent years\cite{Damianou2013, Wilson2013,Duvenaud2014a,Salimbeni2017a, Lee2018,Wilson2019}. It is suitable for complex regression tasks due to its flexibility in incorporating prior knowledge. Furthermore, GP is a probabilistic approach that allowing us to incorporate the confidence of the prediction into the regression result.
+Recent researches show the potential of spatial statistics methods in the problem of SSI. However, another powerful tool in spatial statistics, the Gaussian process (GP), has never received attention it deserves in SSI. Essentially, SSI is a complex regression task. GP is suitable for complex regression tasks due to its flexibility in incorporating prior knowledge. As a powerful tool in the machine learning toolbox \cite{Rasmussen2006}, it has been extensively studied in recent years\cite{Damianou2013, Wilson2013,Duvenaud2014a,Salimbeni2017a, Lee2018,Wilson2019}.  Furthermore, GP is a probabilistic approach that allowing us to incorporate the confidence of the prediction into the regression result.
 
-In this letter, we we propose a transformed kernel learning (TKL) method for SSI based on GP. for heterogeneous environments. Specifically, we model the shadow fading effect as an anisotropic and nonstationary Gaussian process. This model is flexible and consistent with the actual situation. And by leveraging the power of the deep neural network, we improve the expressive ability of the Gaussian process regression (GPR) model. To the best of our knowledge, this is the first attempt to introduce GPs to spatial spectrum inference.
-We then show a considerable improvement in RMSE and CRPS compared to existing state-of-the-art SSI methods.
+In this paper, we innovatively propose a transformed kernel learning (TKL) method for SSI based on GP. Meanwhile, we take environmental heterogeneity into consideration. Specifically, we treat the shadow fading effect as an anisotropic and nonstationary GP and construct a transformed kernel Gaussian process regression (TKGPR) model. We then train the model with data collected by crowd-sourced sensors leveraging the power of modern deep learning tools. Lastly, we make inference based on the trained TKGPR. To the best of our knowledge, its the first time that GP is introduced into SSI and the impact of environmental heterogeneity on SSI is discussed. We improve the expressive ability of the Gaussian process regression (GPR) model with the transformed kernel. This model is more flexible and closer to the situation in the real world. We then show a considerable improvement in root mean square error (RMSE) and continuous rank probability score(CRPS)\cite{Gneiting2007} compared to existing state-of-the-art SSI methods.
 
-The remainder of the letter is as follows: After the system model in Section~II, the deep kernel learning method for radio environment map is considered in Section~III. Subsequently, the simulation results and concluding remarks are expressed in Section~IV and Section~V.
+The remainder of the paper is as follows: After the system model in Section~II, the deep kernel learning method for radio environment map is considered in Section~III. Subsequently, the simulation results and concluding remarks are expressed in Section~IV and Section~V.
 
 
 
 \section{System Model and Problem Statement}
 
-In this letter, we consider an area of 1km by 1km in 2D space $D^2$. Measurements of $N$ crowd-sourced sensors are reported to the fusion center with its location and receive signal strength (RSS).
+In this paper, we consider an area of 1km by 1km in 2D space $D^2$. Measurements of $N$ crowd-sourced sensors are reported to the fusion center with its location and receive signal strength (RSS).
 From the propagation model, the RSS of the $j$-th sensor can be represented as:
 \begin{IEEEeqnarray}{rCl}
   {P}_{r}^{(j)}[dBm] & = & P_t[dBm] - 20log_{10}\left(\frac{4 \pi d_0}{\lambda}\right) \IEEEnonumber\\
@@ -329,10 +326,10 @@ The gradient of parameters can be computed using the chain rule:
 \begin{figure*}[!tb]
   \centering
   \includegraphics[width=7.12in]{./images/radio_map.eps}
-  \caption{Shadowing component of the RSS. (a) The (b)NN algorithm with 20 neighbours}
+  \caption{Shadowing component of the RSS. (a) The (b)NN algorithm with 20 neighbors}
   \label{fig:radio_map}
 \end{figure*}
-We assessed the performance of NN, IDWNN, OK, GPR, and the proposed TKGPR method with different numbers of crowd-sourced sensors in an area of 1km by 1km. Fig.~\ref{fig:radio_map} show the true shadowing component and shadowing component inferenced with 5 different algorithms from the crowd-sourced data. They give us an intuitive sense of the performance of different algorithms.
+We assessed the performance of NN, IDWNN, OK, GPR, and the proposed TKGPR method with different numbers of crowd-sourced sensors in an area of 1km by 1km. Fig.~\ref{fig:radio_map} show the true shadowing component and shadowing component inferred with 5 different algorithms from the crowd-sourced data. They give us an intuitive sense of the performance of different algorithms.
 
 In all cases, SSI performance was assessed by evaluating on a grid of $180\times180$ points covering the area of interest. The performance metrics include the the root mean squared error (RMSE), the continuous ranked probability score (CRPS),
 and the interval score of the 95\% prediction interval (IS)\cite{Gneiting2007}. 
@@ -340,7 +337,7 @@ and the interval score of the 95\% prediction interval (IS)\cite{Gneiting2007}.
 their predictive performance to those of various models.
 
 We find that the TKGPR method is not prone to overfitting.
-We further compare TKGPR with NN, IWNN, OK, and normal GPR with RBF kernel. 
+We further compare TKGPR with NN, IDWNN, OK, and normal GPR with RBF kernel. 
 
 
 % Here, we will evaluate the performance of the proposed algorithm with the CRAWDAD cu/WiMAX datasets \cite{Ton2012}, which was also used in \cite{Phillips2012} and \cite{Hu2020}. The cu/wimax datasets was collected at the University of Colorado Boulder. It contains careful point measurements of the Wimax network serving the campus. We investigate the ``first phase'' sample, which were taken on a 100m equilateral triangular lattice.
@@ -350,7 +347,7 @@ We further compare TKGPR with NN, IWNN, OK, and normal GPR with RBF kernel.
 
 
 \section{Conclusion}
-First, different from the transformation of DNN, they can keep the topology structure of the space.  Second, It is not prone to overfit during the training procedual. However, the hyper-parameter is subttle.
+First, different from the transformation of DNN, they can keep the topology structure of the space.  Second, It is not prone to overfitting during the training procedure. However, the hyper-parameter is subtle.
 
 \ifCLASSOPTIONcaptionsoff
   \newpage
