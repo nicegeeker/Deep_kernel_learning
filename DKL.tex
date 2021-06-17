@@ -68,6 +68,7 @@ pdflang={English}}
 \author{
   Yi-Qun~Xu,
   Bangning~Zhang, %~\IEEEmembership{Life~Fellow,~IEEE}
+  Xiaokai~Zhang, 
   Jingming~Hu, 
   Daoxing~Guo%~\IEEEmembership{Member,~IEEE,}
 
@@ -82,7 +83,7 @@ pdflang={English}}
 \maketitle
 
 \begin{abstract}
-Crowd-sourced spectrum sensing has gained tremendous attention in recent years. Spatial spectrum inference (SSI) based on sensor data can be used for radio environment map (REM) construction. However, the environmental heterogeneity was not considered in papers on SSI and REM construction. In this letter, we innovatively propose a transformed kernel learning (TKL) method, which considers environmental heterogeneity based on GP for SSI. To the best of our knowledge, it's the first time that GP is introduced into SSI, and the impact of environmental heterogeneity is discussed. The experimental results show a considerable improvement in root mean square error and continuous rank probability score compared to existing state-of-the-art SSI methods.
+Crowd-sourced spectrum sensing has gained tremendous attention in recent years. Spatial spectrum inference (SSI) based on sensor data can be used for radio environment map (REM) construction. However, the environmental heterogeneity was not considered in papers on SSI and REM construction. In this letter, we innovatively propose a transformed kernel learning (TKL) method based on Gaussian process (GP) for SSI, which considers environmental heterogeneity. To the best of our knowledge, it's the first time that GP is introduced into SSI, and the impact of environmental heterogeneity is discussed. The experimental results show a considerable improvement in root mean square error and continuous rank probability score compared to existing state-of-art SSI methods.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -94,9 +95,9 @@ Crowd-sourced spectrum sensing has gained tremendous attention in recent years. 
 
 The spatial spectrum inference (SSI) is to get the receive signal strength (RSS), where there is no sensor device, from data collected by spatially distributed sensors. It is regarded as the radio environment map (REM) construction method in many research papers\cite{Phillips2012, Pesko2014, Sato2017, Li2018, Han2019, Katagiri2020, Xu2021}. Various aspects of REM were studied in \cite{Li2018}. They summarized the main state-of-art construction methods of REM, including Kriging, nearest neighbor (NN), inverse distance weighted nearest neighbor (IDWNN), trend surface, thin plant spines, discrete smooth interpolation, and joint tensor completion. In \cite{Han2019}, the authors made a comparison between NN, IDWNN, and the Kriging method. They argued that the Kriging algorithm has the best accuracy. In \cite{Xu2021}, they proposed a Bayesian hierarchical model-based method for REM construction, which takes the correlation of shadow fading into consideration. 
 
-Essentially, SSI is a complex regression task. GP is suitable for complex regression tasks due to its flexibility in incorporating prior knowledge. As a powerful tool in the machine learning toolbox \cite{Rasmussen2006}, it has been extensively studied in recent years\cite{Damianou2013, Wilson2013, Duvenaud2014a, Salimbeni2017a, Lee2018, Wilson2019}.  Furthermore, GP is a probabilistic approach that allowing us to incorporate the confidence of the prediction into the regression result.
+Essentially, SSI is a complex regression task. Gaussian process (GP) is suitable for complex regression tasks due to its flexibility in incorporating prior knowledge. As a powerful tool in the machine learning toolbox \cite{Rasmussen2006}, it has been extensively studied in recent years\cite{Damianou2013, Wilson2013, Duvenaud2014a, Salimbeni2017a, Lee2018, Wilson2019}.  Furthermore, GP is a probabilistic approach that allowing us to incorporate the confidence of the prediction into the regression result.
 
-In this letter, we innovatively propose a transformed kernel learning (TKL) method, which considers environmental heterogeneity based on GP for SSI. Specifically, we treat the shadow fading effect as an anisotropic and nonstationary GP and construct a transformed kernel Gaussian process regression (TKGPR) model. We then train the model with data collected by crowd-sourced sensors leveraging the power of modern deep learning tools. Lastly, we make inferences based on the trained TKGPR. To the best of our knowledge, it's the first time that GP is introduced into SSI, and the impact of environmental heterogeneity on SSI is discussed. We improve the expressive ability of the Gaussian process regression (GPR) model with the transformed kernel. This model is more flexible and closer to the situation in the real world. We then show a considerable improvement in root mean square error (RMSE) and continuous rank probability score(CRPS)\cite{Gneiting2007} compared to existing state-of-the-art SSI methods.
+In this letter, we innovatively propose a transformed kernel learning (TKL) method, which considers environmental heterogeneity based on GP for SSI. Specifically, we treat the shadow fading effect as an anisotropic and nonstationary GP and construct a transformed kernel Gaussian process regression (TKGPR) model. We then train the model with data collected by crowd-sourced sensors leveraging the power of modern deep learning tools. Lastly, we make inferences based on the trained TKGPR. To the best of our knowledge, it's the first time that GP is introduced into SSI, and the impact of environmental heterogeneity on SSI is discussed. We improve the expressive ability of the Gaussian process regression (GPR) model with the transformed kernel. This model is more flexible and closer to the situation in the real world. We then show a considerable improvement in root mean square error (RMSE) and continuous rank probability score (CRPS)\cite{Gneiting2007} compared to existing state-of-art SSI methods.
 
 \section{System Model and Problem Statement}
 
@@ -166,7 +167,7 @@ The GP training is formulated as an optimization problem:
 which is a non-convex problem. In practice, the gradient-based optimization algorithms are used to find the optimum of NLML.
 
 \subsection{Deep Kernel Learning (DKL)}
-The kernel function $k(\cdot, \cdot)$ of GPs encodes structural assumptions about the class of functions we wish to model\cite{Duvenaud2014a}, which corresponding to the ``inductive bias'' of the learning method. In this sense, the prior knowledge about the model can be embedded into GP through the kernel function. There are many base kernels such as linear kernel, RBF kernel, periodic kernel, Matérn kernel, and spectral mixture kernel\cite{Wilson2013}. For example, the linear kernel implies a linear function, and the periodic kernel implies a function with repeating structure \cite{Wilson2013}. The design and choice of the kernel have a profound impact on the performance of the GPR model.
+The kernel function $k(\cdot, \cdot)$ of GPs encodes structural assumptions about the class of functions we wish to model\cite{Duvenaud2014a}, which corresponding to the ``inductive bias'' of the learning method. In this sense, the prior knowledge about the model can be embedded into GP through the kernel function. There are many base kernels such as linear kernel, radial basis function (RBF) kernel, periodic kernel, Matérn kernel, and spectral mixture kernel\cite{Wilson2013}. For example, the linear kernel implies a linear function, and the periodic kernel implies a function with repeating structure \cite{Wilson2013}. The design and choice of the kernel have a profound impact on the performance of the GPR model.
 
 DKL proposed by Wilson \cite{Wilson2019} encapsulate the expressive power of deep architectures into GP. Specifically, deep kernel learning starts from a base kernel $k(x_i, x_j |  \mathbf{\theta})$ with parameters $\mathbf{\theta}$, and then transform the inputs $x$ with a deep neural network (DNN) $g(x;\mathbf{w})$ parameterized by weights $\mathbf{w}$:
 \begin{IEEEeqnarray}{rCl}
@@ -216,13 +217,13 @@ where
   \smash{\left\{ \IEEEstrut[8\jot] \right.} & \phi_1(s_k; \boldsymbol{\alpha}) & = & s_k, \label{eq:block2_case2} \\* 
   & \phi_{i+1}(s_k; \boldsymbol{\alpha}) & = & 1/(1 + e^{-\alpha_{i1}(s_k - \alpha_{i2})}), i=1,\dots, r, \label{eq:block1_case3} \IEEEeqnarraynumspace 
 \end{IEEEeqnarray}
-$\boldsymbol{\alpha}=[\alpha_{ij}]_{r\times2}$ is the hyper-parameter, $\mathbf{w}_{(k)}$ is the weight parameter for the axial transformation of the $k$-th dimension..
+$\boldsymbol{\alpha}=[\alpha_{ij}]_{r\times2}$ is the hyper-parameter, $\mathbf{w}_a^{(k)}$ is the weight parameter for the axial transformation of the $k$-th dimension..
 
 \subsubsection{Radial Basis Function Transformation Unit (RBFTU)}
 \begin{figure}[!tb]
   \centering
   \includegraphics[width=3in]{./images/rbf_unit.eps}
-  \caption{Radical basis function transformation unit. The upper figures show the boundary of the transformation, the lower figures show the transformed space. (a) One local RBFTU expand a local area in the space (b) The whole space can be transformed with multiple RBFTUs evenly distributed.}
+  \caption{Radial basis function transformation unit. The upper figures show the boundary of the transformation, the lower figures show the transformed space. (a) One local RBFTU expand a local area in the space, (b) The whole space can be transformed with multiple RBFTUs evenly distributed.}
   \label{fig:rbf_unit}
 \end{figure}
 A RBFTU is a local expansion/contraction of the original space. We define RBFTU as follows:
@@ -231,7 +232,7 @@ A RBFTU is a local expansion/contraction of the original space. We define RBFTU 
 \end{IEEEeqnarray}
 where $\mathbf{s}=(s_1, s_2)$ is a point in the original space $D^2$. There are two hyper-parameters: $\boldsymbol{\gamma}=(\gamma_{1}, \gamma_{2})$ is the center of the local expansion/contraction, and $\beta$ controls the bolder of the local expansion/contraction. The weight parameter $w_r$ controls the degree of expansion/contraction. The transformation can be guaranteed to be injective by constraining $w_r$ in $(-1, \frac{1}{2}e^{3/2})$~\cite{Perrin1999}. 
 
-Panel (a) of Fig.~\ref{fig:rbf_unit} shows an example of RBFTU centered at location $(0.25, -0.125)$. By selecting different $\gamma$s and $\beta$s and cascading RBFTUs together, we can get a non-linear transformation of the whole space as shown in Fig.~\ref{fig:rbf_unit}~panel~(b).
+Panel (a) of Fig.~\ref{fig:rbf_unit} shows an example of RBFTU centered at location $(0.25, -0.125)$. By selecting different $\boldsymbol{\gamma}$s and $\beta$s and cascading RBFTUs together, we can get a non-linear transformation of the whole space as shown in Fig.~\ref{fig:rbf_unit}~panel~(b).
 \subsubsection{M\"obius Transformation Unit (MTU)}
 \begin{figure}[!tb]
   \centering
@@ -277,15 +278,15 @@ and parameters of the GP base kernel can be learned jointly from data by minimiz
 %   \caption{Shadowing component inferred with 5 different algorithms. (a) The observed shadowing component with 500 crowd-soused sensors, (b) True value of the shadowing component, (c) NN algorithm with 20 neighbors, (d) IDWNN algorithm with 20 neighbors, (e) OK algorithm with exponential variogram, (f) GP with RBF kernel, (g) The proposed TKL method.}
 %   \label{fig:radio_map}
 % \end{figure*}
-As shown in Fig.~\ref{fig:tkgpr_model}, we construct a TKGPR model for the SSI problem. The TKGPR is consists of an ATU of dimension 1, an ATU of dimension 2, a sequence of RBFTUs, and an MTU to represent the nonlinear transformation of the original space. Then the transformed inputs are fed into a GP. 
+As shown in Fig.~\ref{fig:tkgpr_model}, we construct a TKGPR model for the SSI problem. The TKGPR model is consists of an ATU of dimension 1, an ATU of dimension 2, a sequence of RBFTUs, and an MTU to represent the nonlinear transformation of the original space. Then the transformed inputs are fed into a GP. 
 
-The hyper-parameters of TKGPR are as follows: Resolutions of both ATUs are 20. RBFTUs are evenly distributed in space with resolution $9\times9$. The border of each RBFTU intersects the center of adjacent RBFTUs to ensure coverage of the entire area. We choose the RBF kernel as the base kernel for GP. There are 133 parameters in the TKGPR model: 21 for each ATU, 81 for RBFTUs, 8 for MTU, and 2 for the base kernel (scale parameter $\sigma^2$ and length parameter $l$ in Eq.~\eqref{eq:RBF_kernel}). 
+The hyper-parameters of TKGPR model are as follows: Resolutions of both ATUs are 20. RBFTUs are evenly distributed in space with resolution $9\times9$. The border of each RBFTU intersects the center of adjacent RBFTUs to ensure coverage of the entire area. We choose the RBF kernel as the base kernel for GP. There are 133 parameters in the TKGPR model: 21 for each ATU, 81 for RBFTUs, 8 for MTU, and 2 for the base kernel (scale parameter $\sigma^2$ and length parameter $l$ in Eq.~\eqref{eq:RBF_kernel}). 
 
-The composition of transformation can be represented as:
+The composition of transformations can be represented as:
 \begin{IEEEeqnarray}{rCl}
   f(\cdot) = f_m\circ f_r^{(81)} \circ f_r^{(80)}\circ \cdots \circ f_r^{(1)}\circ f_a^{(2)} \circ f_a^{(1)}(\cdot).
 \end{IEEEeqnarray}
-Starting from the base kernel with parameter $\sigma$ and $l$,   
+Starting from the base kernel with parameter $\sigma^2$ and $l$,   
 \begin{IEEEeqnarray}{rCl}
   k(\mathbf{s}_i, \mathbf{s}_j;\sigma, l) = \sigma^2\exp\left(-\frac{\lVert \mathbf{s}_i - \mathbf{s}_j\rVert}{2l^2}\right),\label{eq:RBF_kernel}
 \end{IEEEeqnarray}
