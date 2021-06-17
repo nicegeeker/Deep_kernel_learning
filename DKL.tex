@@ -83,7 +83,7 @@ pdflang={English}}
 \maketitle
 
 \begin{abstract}
-Crowd-sourced spectrum sensing has gained tremendous attention in recent years. Spatial spectrum inference (SSI) based on sensor data can be used for radio environment map (REM) construction. However, the environmental heterogeneity was not considered in papers on SSI and REM construction. In this letter, we innovatively propose a transformed kernel learning (TKL) method based on Gaussian process (GP) for SSI, which considers environmental heterogeneity. To the best of our knowledge, it's the first time that GP is introduced into SSI, and the impact of environmental heterogeneity is discussed. The experimental results show a considerable improvement in root mean square error and continuous rank probability score compared to existing state-of-art SSI methods.
+Crowd-sourced spectrum sensing has gained tremendous attention in recent years. Spatial spectrum inference (SSI), based on sensor data, can be implemented into radio environment map (REM) construction. To our best knowledge, no prior work has analyzed the environmental heterogeneity on SSI and REM construction, which is the natural character of radio propagation. In this letter, we innovatively propose a transformed kernel learning (TKL) method based on the Gaussian process (GP) for SSI by considering the environmental heterogeneity. The experimental results show a considerable improvement in root mean square error and continuous rank probability score compared to existing state-of-art SSI methods.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -93,7 +93,7 @@ Crowd-sourced spectrum sensing has gained tremendous attention in recent years. 
 \section{Introduction}
 \IEEEPARstart{C}{rowd-sourced} spectrum sensing (CSS), which is to recruit private mobile communication terminals to perform spectrum sensing, has received much research attentions \cite{Ding2014, Jin2018, Han2019, Hu2020, Amin2020} in recent years. Billions of mobile devices can guarantee geographical coverage, especially in urban areas. To use the big data collected by the CSS system, one of the most stirring applications is for spectrum inference. Spectrum inference is a generalization of spectrum prediction from time dimension to space and frequency dimensions, which is a promising technique for capturing the relevant information of radiofrequency from measurement data.\cite{Ding2018}.
 
-The spatial spectrum inference (SSI) is to get the receive signal strength (RSS), where there is no sensor device, from data collected by spatially distributed sensors. It is regarded as the radio environment map (REM) construction method in many research papers\cite{Phillips2012, Pesko2014, Sato2017, Li2018, Han2019, Katagiri2020, Xu2021}. Various aspects of REM were studied in \cite{Li2018}. They summarized the main state-of-art construction methods of REM, including Kriging, nearest neighbor (NN), inverse distance weighted nearest neighbor (IDWNN), trend surface, thin plant spines, discrete smooth interpolation, and joint tensor completion. In \cite{Han2019}, the authors made a comparison between NN, IDWNN, and the Kriging method. They argued that the Kriging algorithm has the best accuracy. In \cite{Xu2021}, they proposed a Bayesian hierarchical model-based method for REM construction, which takes the correlation of shadow fading into consideration. 
+The spatial spectrum inference (SSI) is to infer the receive signal strength (RSS), where there is no sensor device, from data collected by spatially distributed sensors. It is regarded as the radio environment map (REM) construction method in many research papers\cite{Phillips2012, Pesko2014, Sato2017, Li2018, Han2019, Katagiri2020, Xu2021}. Paper\cite{Li2018} summarized the main state-of-art construction methods of REM, including Kriging, nearest neighbor (NN), inverse distance weighted nearest neighbor (IDWNN), trend surface, thin plant spines, discrete smooth interpolation, and joint tensor completion. In \cite{Han2019}, the authors made a comparison between NN, IDWNN, and the Kriging method, which indicated that the Kriging algorithm has the best accuracy. In \cite{Xu2021}, they proposed a Bayesian hierarchical model-based method for REM construction, which takes the correlation of shadow fading into consideration. 
 
 Essentially, SSI is a complex regression task. Gaussian process (GP) is suitable for complex regression tasks due to its flexibility in incorporating prior knowledge. As a powerful tool in the machine learning toolbox \cite{Rasmussen2006}, it has been extensively studied in recent years\cite{Damianou2013, Wilson2013, Duvenaud2014a, Salimbeni2017a, Lee2018, Wilson2019}.  Furthermore, GP is a probabilistic approach that allowing us to incorporate the confidence of the prediction into the regression result.
 
@@ -110,27 +110,27 @@ In this letter, we consider an area of 1km by 1km in 2D space $D^2$. Measurement
 \end{IEEEeqnarray}
 where $P_t$ is the transmitted power,  $d_0$ is a reference distance, $\lambda$ is the wavelength of radiation, $\eta$ is the free-space path loss exponent, $L_t$ is the location of the transmitter, $l_j$ is the location of the $j$-th sensor, $S_{j}$ is the shadowing component from the transmitter to $j$-th sensor, and $N_j$ is the measurement error caused by crowd-sourced sensor. 
 
-The main task for spatial inference is to obtain the RSS where there is no sensor and further draw the REM of the area of interest. From Eq.~\eqref{eq:propagation_model}, the RSS can be decomposed into three parts: the free-path loss component, the shadowing component, and the measurement error. The free-path loss component can be calculated with the link budget. The difficulty for spatial inference is caused by the shadowing component $S_j$\cite{Xu2021}. In radio communication systems, shadowing is a random phenomenon, which is typically modeled by a log-normal distribution\cite{Cho2010}. 
+The main task for spatial inference is to obtain the RSS where there is no sensor and further draw the REM of the area of interest. The RSS can be decomposed into three parts from Eq.~\eqref{eq:propagation_model}, including the free-path loss component, the shadowing component, and the measurement error. The free-path loss component can be calculated with the link budget. The difficulty for spatial inference is caused by the shadowing component $S_j$\cite{Xu2021}. In radio communication systems, shadowing is a random phenomenon, which is typically modeled by a log-normal distribution\cite{Cho2010}. 
 
 Moreover, the spatial correlation of shadowing has been studied systematically\cite{Agrawal2009, Gudmundson1991} and used in REM construction to improve the inference accuracy\cite{Han2019, Sato2017, Xu2021}. However, in previous studies, the shadowing component is treated as an isotropic stationary process. It's a strong assumption that simplifies reality dramatically. The shadowing is affected by the obstacles in the environment. In most cases, the obstacles are not evenly distributed. Therefore, due to the heterogeneity of the environment, the shadowing component should be modeled as an anisotropic and nonstationary process. This attribute of shadowing increases the challenge for SSI. Our study aims to characterize the heterogeneity of the environment to improve the accuracy of SSI.
 \section{Transformed Kernel Learning}
 \subsection{Background on Gaussian Process}
-A GP is a collection of random variables, any finite number of which have a joint Gaussian distribution. For a regression problem $y=f(\mathbf{x})+ \epsilon$, where $\mathbf{x}\in\mathbf{R}^D$ and  $\epsilon \sim \mathcal{N}(0, \sigma_n^2)$ is independent identical distributed Gaussian measurement noise, GP method assume the unknown function $f$ follow a GP which is $\mathcal{GP}\left(\mu(\cdot), k(\cdot, \cdot)\right)$, where $\mu(\cdot)$ is the mean function and $k(\cdot, \cdot)$ is the covariance function which is also called the kernel function.
+A GP is a collection of random variables, and any finite number of which have a joint Gaussian distribution. For a regression problem $y=f(\mathbf{x})+ \epsilon$, where $\mathbf{x}\in\mathbf{R}^D$ and  $\epsilon \sim \mathcal{N}(0, \sigma_n^2)$ is independent identical distributed Gaussian measurement noise, GP method assumes that the unknown function $f$ follows a GP, which is $\mathcal{GP}\left(\mu(\cdot), k(\cdot, \cdot)\right)$, where $\mu(\cdot)$ is the mean function and $k(\cdot, \cdot)$ is the covariance function, also called the kernel function.
 
-For training inputs $\mathbf{X}=[\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_n]^ T$ and corresponding noisy training targets $\mathbf{y}=[y_1, y_2, \dots, y_n]^T$, to predict the function values $f_*$ at the test points $\mathbf{x}_*$, the joint distribution of training points and predict targets can be represented as:
+For training inputs $\mathbf{X}=[\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_n]^ T$, corresponding noisy training targets $\mathbf{y}=[y_1, y_2, \dots, y_n]^T$, and prediction function values $f_*$ at the test points $\mathbf{x}_*$, the joint distribution of training points and predict targets can be represented as
 \begin{IEEEeqnarray}{c}
   \left[ \begin{matrix} \mathbf{y} \\ f_* \end{matrix} \right]  \sim
   \mathcal{N} \left(\left[\begin{matrix} \mu_{f} \\
       \mu_{*}\end{matrix} \right],
   \left[ \begin{matrix} K_{ff}+ \sigma_{n}^{2}I & K_{f*} \\ K_{*f} & K_{**}\end{matrix} \right]  \right),
 \end{IEEEeqnarray}
-where the mean vector and the covariance matrix can be computed with the mean and kernel function of the GP:
+where the mean vector and the covariance matrix can be computed with the mean and kernel function of the GP
 \begin{IEEEeqnarray}{rCl}
   \mu_i  & = & \mu(\mathbf{x}_i), \\
-  K_{ij} & = & k(\mathbf{x}_i, \mathbf{x}_j),
+  K_{ij} & = & k(\mathbf{x}_i, \mathbf{x}_j).
 \end{IEEEeqnarray}
 
-We obtain the predictive distribution at point $\mathbf{x}_*$ as:
+We obtain the predictive distribution at point $\mathbf{x}_*$ as
 \begin{IEEEeqnarray}{rCl}
   p\left( f_* \middle| \mathbf{X}, \mathbf{y}, \mathbf{x}_* \right) & = & \mathcal{N}\left( f_* \middle| \mu_*, \sigma_*^2 \right),\label{eq:predictive_distribution}
 \end{IEEEeqnarray}
@@ -140,13 +140,13 @@ where:
   \sigma_*^2 & = & k(\mathbf{x}_*, \mathbf{x}_*) - k(\mathbf{x}_*, \mathbf{X}) \left[k(\mathbf{X}, \mathbf{X}) + \sigma_N^2 \mathbf{I})^{-1}k(\mathbf{X}, \mathbf{x}_*)\right], \IEEEeqnarraynumspace
 \end{IEEEeqnarray}
 
-In GP regression (GPR), the mean function $\mu(\cdot)$ is often assumed to be $\mathbf{0}$. The GP is trained by maximize the marginal likelihood with respect to GP parameters. The marginal likelihood is given by:
+In GP regression (GPR), the mean function $\mu(\cdot)$ is generally assumed to be $\mathbf{0}$. The GP is trained by maximize the marginal likelihood with respect to GP parameters. The marginal likelihood is given by
 \begin{IEEEeqnarray}{rCl}
   p\left(\mathbf{y} | \mathbf{X}, \theta \right) & = & \int p\left( \mathbf{y} | f, \mathbf{X} \right) p(f | \mathbf{X}) \dd f  \IEEEnonumber \\*
   & = & \int \mathcal{N}\left(\mathbf{y} \middle| f(\mathbf{X}), \sigma_{n}^{2} \mathbf{I} \right) \mathcal{N}\left( f(\mathbf{X}) \middle| \mathbf{0}, \mathbf{K} \right) \dd f(\mathbf{X})   \IEEEnonumber \\*
   & = & \mathcal{N} ( \mathbf{y} | \mathbf{0}, \mathbf{K} + \sigma_n^{2} \mathbf{I} ),
 \end{IEEEeqnarray}
-where $\mathbf{K}$ is the kernel matrix with $\mathbf{K}_{ij} = k(\mathbf{x}_i, \mathbf{x}_j)$ , $\mathbf{X}$ are training inputs, $\mathbf{y}$ are training targets. Therefore, the negative log marginal likelihood (NLML) is:
+where $\mathbf{K}$ is the kernel matrix with $\mathbf{K}_{ij} = k(\mathbf{x}_i, \mathbf{x}_j)$ , $\mathbf{X}$ are training inputs, $\mathbf{y}$ are training targets. Therefore, the negative log marginal likelihood (NLML) is
 \begin{IEEEeqnarray}{rCl}
   \IEEEyesnumber
   \mathcal{L}(\theta) & = & - \text{log} p(\mathbf{y} | \mathbf{X}, \theta) \IEEEnonumber \\
@@ -169,18 +169,18 @@ which is a non-convex problem. In practice, the gradient-based optimization algo
 \subsection{Deep Kernel Learning (DKL)}
 The kernel function $k(\cdot, \cdot)$ of GPs encodes structural assumptions about the class of functions we wish to model\cite{Duvenaud2014a}, which corresponding to the ``inductive bias'' of the learning method. In this sense, the prior knowledge about the model can be embedded into GP through the kernel function. There are many base kernels such as linear kernel, radial basis function (RBF) kernel, periodic kernel, Matérn kernel, and spectral mixture kernel\cite{Wilson2013}. For example, the linear kernel implies a linear function, and the periodic kernel implies a function with repeating structure \cite{Wilson2013}. The design and choice of the kernel have a profound impact on the performance of the GPR model.
 
-DKL proposed by Wilson \cite{Wilson2019} encapsulate the expressive power of deep architectures into GP. Specifically, deep kernel learning starts from a base kernel $k(x_i, x_j |  \mathbf{\theta})$ with parameters $\mathbf{\theta}$, and then transform the inputs $x$ with a deep neural network (DNN) $g(x;\mathbf{w})$ parameterized by weights $\mathbf{w}$:
+DKL proposed by Wilson \cite{Wilson2019} encapsulate the expressive power of deep architectures into GP. Specifically, deep kernel learning starts from a base kernel $k(x_i, x_j |  \mathbf{\theta})$ with parameters $\mathbf{\theta}$, and then transform the inputs $x$ with a deep neural network (DNN) $g(x;\mathbf{w})$ parameterized by weights $\mathbf{w}$
 \begin{IEEEeqnarray}{rCl}
-  k(x_i, x_j | \mathbf{\theta}) & \rightarrow & k( g(x_i, \mathbf{w}), g(x_j, \mathbf{w}) |  \mathbf{\theta}, \mathbf{w})
+  k(x_i, x_j | \mathbf{\theta}) & \rightarrow & k( g(x_i, \mathbf{w}), g(x_j, \mathbf{w}) |  \mathbf{\theta}, \mathbf{w}).
 \end{IEEEeqnarray}
 The deep kernel increases the expressive ability of GP significantly. DKL views the resulting kernel as a scalable deep kernel and provides the kernel's automatic learning through GP marginal likelihood. 
 
 However, in some cases, the DKL is not stable, as the GP uses the flexibility of the DNN to try to correlate all inputs. Meanwhile, the DNN in DKL is prone to overfitting\cite{Ober2021}. 
 
 \subsection{Transformed Kernel Learning}
-One way to introduce nonstationarity in GP is to introduce an arbitrary non-linear transformation $f(x)$ which map the input $x$ in space $D$ to a new space $D^\prime$, and then use a stationary covariance function in space $D^\prime$\cite{Rasmussen2006}. In DKL, the DNN is a nonlinear function that transforms the inputs. And the transformation is characterized by the weights parameter of the DNN. However, the inputs of SSI are the locations of crowd-sourced sensors. The input space is the actual physical space. DNN transformation of the input space causes the spatial folding effect, which is inconsistent with the meaning of the physical quantity studied. Therefore, the spatial folding effect and the pitfalls of DKL make it unsuitable for SSI.
+One way to introduce nonstationarity in GP is to introduce an arbitrary non-linear transformation $f(x)$, which maps the input $x$ in space $D$ to a new space $D^\prime$, and then use a stationary covariance function in space $D^\prime$\cite{Rasmussen2006}. In DKL, the DNN is a nonlinear function that transforms the inputs. And the transformation is characterized by the weights parameter of the DNN. However, the inputs of SSI are the locations of crowd-sourced sensors. The input space is the actual physical space. DNN transformation of the input space causes the spatial folding effect, which is inconsistent with the meaning of the physical quantity studied. Therefore, the spatial folding effect and the pitfalls of DKL make it unsuitable for SSI.
 
-Inspired by the pros and cons of DKL, we should design a nonlinear transformation with the following properties:
+Inspired by the pros and cons of DKL, we should design a nonlinear transformation with the following properties.
 \begin{itemize}
   \item The nonlinear transformation can be characterized by several parameters, which give it the flexibility to represent the anisotropy and nonstationarity.
   \item The nonlinear transformation is an injective mapping and topological homeomorphous, which does not cause spatial folding effects.
@@ -197,11 +197,11 @@ We design 3 kinds of simple nonlinear transformations. Each of them conforms to 
 
 \subsubsection{Axial Transformation Unit (ATU)}
 An example of ATU is demonstrated in Fig.~\ref{fig:axial_trans_unit}.
-We implement the ATU in 3 steps:
+We implement the ATU in 3 steps.
 First, we normalize the input dimension to be transformed to the range $[0, 1]$ or $[-1, 0]$ (to distinguish the $x$ axial and the $y$ axial). 
 Second, we perform nonlinear transformation through weighted sum of a bunch of basis functions $\boldsymbol{\phi}(s_k)$. The first basis functions is a linear scaling $\phi_1(s_k) = w_1x$, and the rest basis functions are shifted sigmoid functions $\phi_{i+1}(s_k; \boldsymbol{\alpha}) = \frac{1}{1 + exp(-\alpha_{i1}(s_k - \alpha_{i2}))},(i=1,\dots, r)$, where $\alpha_{i1}$ determines the gradient of the sigmoid functions, $\alpha_{i2}$ determines the position of the sigmoid functions, and $r$ is the number of sigmoid functions which can represent the resolution of local transformations. Third, we normalize the output to range $[0,1]$ or $[-1, 0]$.
 
-Due to the strict monotonicity of the sigmoid functions, if we constrain the weight parameters to positive values the ATU is guaranteed to be an injective nonlinear transformation $f_{a}:[0, 1] \rightarrow [0,1] \text{ or }[-1, 0] \rightarrow [-1,0] $, which has some flexibility controlled by the weight parameters. We define the ATU which transform the $k$-th dimension as follows:
+Due to the strict monotonicity of the sigmoid functions, if we constrain the weight parameters to positive values, the ATU is guaranteed to be an injective nonlinear transformation $f_{a}:[0, 1] \rightarrow [0,1] \text{ or }[-1, 0] \rightarrow [-1,0] $, which has some flexibility controlled by the weight parameters. We define the ATU which transform the $k$-th dimension as follows:
 \begin{IEEEeqnarray}{rCl}
   f_{a}^{(k)}(\mathbf{s};\mathbf{w}_a^{(k)}, \boldsymbol{\alpha}) &=& (s_1^\prime,s_2^\prime),\\
   \noalign{\noindent and \vspace{2\jot}}
@@ -212,12 +212,12 @@ Due to the strict monotonicity of the sigmoid functions, if we constrain the wei
   \end{cases}
 \end{IEEEeqnarray}
 where
-\begin{IEEEeqnarray}{rrCl}
-& g(s_k;\boldsymbol{\alpha}) &=& \mathbf{w}_{a}^{(k)T} \cdot \boldsymbol{\phi}(s_k;\boldsymbol{\alpha}), \label{eq:block1_case1}\\* 
-  \smash{\left\{ \IEEEstrut[8\jot] \right.} & \phi_1(s_k; \boldsymbol{\alpha}) & = & s_k, \label{eq:block2_case2} \\* 
-  & \phi_{i+1}(s_k; \boldsymbol{\alpha}) & = & 1/(1 + e^{-\alpha_{i1}(s_k - \alpha_{i2})}), i=1,\dots, r, \label{eq:block1_case3} \IEEEeqnarraynumspace 
+\begin{IEEEeqnarray}{rCl}
+ g(s_k;\boldsymbol{\alpha}) &=& \mathbf{w}_{a}^{(k)T} \cdot \boldsymbol{\phi}(s_k;\boldsymbol{\alpha}),\\* 
+ \phi_1(s_k; \boldsymbol{\alpha}) & = & s_k, \\* 
+ \phi_{i+1}(s_k; \boldsymbol{\alpha}) & = & 1/(1 + e^{-\alpha_{i1}(s_k - \alpha_{i2})}), i=1,\dots, r,  \IEEEeqnarraynumspace 
 \end{IEEEeqnarray}
-$\boldsymbol{\alpha}=[\alpha_{ij}]_{r\times2}$ is the hyper-parameter, $\mathbf{w}_a^{(k)}$ is the weight parameter for the axial transformation of the $k$-th dimension..
+$\boldsymbol{\alpha}=[\alpha_{ij}]_{r\times2}$ is the hyper-parameter, $\mathbf{w}_a^{(k)}$ is the weight parameter for the axial transformation of the $k$-th dimension.
 
 \subsubsection{Radial Basis Function Transformation Unit (RBFTU)}
 \begin{figure}[!tb]
@@ -226,7 +226,7 @@ $\boldsymbol{\alpha}=[\alpha_{ij}]_{r\times2}$ is the hyper-parameter, $\mathbf{
   \caption{Radial basis function transformation unit. The upper figures show the boundary of the transformation, the lower figures show the transformed space. (a) One local RBFTU expand a local area in the space, (b) The whole space can be transformed with multiple RBFTUs evenly distributed.}
   \label{fig:rbf_unit}
 \end{figure}
-A RBFTU is a local expansion/contraction of the original space. We define RBFTU as follows:
+A RBFTU is a local expansion/contraction of the original space. We define RBFTU as follows
 \begin{IEEEeqnarray}{rCl}
   f_{r}(\mathbf{s}; w_r, \beta,\boldsymbol{\gamma}) &=& \mathbf{s} + w_{r}(\mathbf{s} - \boldsymbol{\gamma})e^{-\beta\lVert\mathbf{s} - \boldsymbol{\gamma}\rVert}, 
 \end{IEEEeqnarray}
@@ -250,12 +250,12 @@ where
   g_{m}(z) &=& \frac{az + b}{cz+d},
   \label{eq:mobius_transform}
 \end{IEEEeqnarray}
-$a,b,c,d$ are complex numbers satisfying $ad-bc\neq 0 $, the weight parameters of MTU are:
+$a,b,c,d$ are complex numbers satisfying $ad-bc\neq 0 $. The weight parameters of MTU are:
 \begin{IEEEeqnarray}{rCl}
   \mathbf{w}_m = [\Re(a),\Im(a), \Re(b),\Im(b),\Re(c),\Im(c), \Re(d),\Im(d)].\IEEEeqnarraynumspace
 \end{IEEEeqnarray}
 
-Fig.~\ref{fig:mobius_unit} gives an example of MTU transforms a regular chessboard pattern in $D^2=[0, 1] \times [0, 1]$. From Eq.~\eqref{eq:mobius_transform}, we can deduce $g_m(-d/c)= \infty$. Therefore, if we normalize the area of interest into $D^2=[0, 1] \times [0, 1]$, to avoid mapping input point to $\infty$, $-d/c$ must be constrained not in area enclosed by points $[0+0\mathbf{j},0+1\mathbf{j},1+1\mathbf{j},1+0\mathbf{j}]$ in complex plane.
+Fig.~\ref{fig:mobius_unit} gives an example of MTU transforms a regular chessboard pattern in $D^2=[0, 1] \times [0, 1]$. From Eq.~\eqref{eq:mobius_transform}, we can deduce $g_m(-d/c)= \infty$. Therefore, to avoid mapping input point to $\infty$, $-d/c$ must be constrained not in area enclosed by points $[0+0\mathbf{j},0+1\mathbf{j},1+1\mathbf{j},1+0\mathbf{j}]$ in complex plane, if we normalize the area of interest into $D^2=[0, 1] \times [0, 1]$.
 
 These three kinds of basic transformation units are all satisfying the two properties mentioned above. They can be used as building blocks for nonlinear transformation.
 For specific scenarios, we can choose appropriate composition of them and set proper values for the hyper-parameters $[\boldsymbol{\alpha}, \beta, \boldsymbol{\gamma}]$, which is a design choice. Meanwhile, the weight parameters:
@@ -280,7 +280,7 @@ and parameters of the GP base kernel can be learned jointly from data by minimiz
 % \end{figure*}
 As shown in Fig.~\ref{fig:tkgpr_model}, we construct a TKGPR model for the SSI problem. The TKGPR model is consists of an ATU of dimension 1, an ATU of dimension 2, a sequence of RBFTUs, and an MTU to represent the nonlinear transformation of the original space. Then the transformed inputs are fed into a GP. 
 
-The hyper-parameters of TKGPR model are as follows: Resolutions of both ATUs are 20. RBFTUs are evenly distributed in space with resolution $9\times9$. The border of each RBFTU intersects the center of adjacent RBFTUs to ensure coverage of the entire area. We choose the RBF kernel as the base kernel for GP. There are 133 parameters in the TKGPR model: 21 for each ATU, 81 for RBFTUs, 8 for MTU, and 2 for the base kernel (scale parameter $\sigma^2$ and length parameter $l$ in Eq.~\eqref{eq:RBF_kernel}). 
+The hyper-parameters of the TKGPR model are as follows. Resolutions of both ATUs are 20. RBFTUs are evenly distributed in space with resolution $9\times9$. The border of each RBFTU intersects the center of adjacent RBFTUs to ensure coverage of the entire area. We choose the RBF kernel as the base kernel for GP. There are 133 parameters in the TKGPR model: 21 for each ATU, 81 for RBFTUs, 8 for MTU, and 2 for the base kernel (scale parameter $\sigma^2$ and length parameter $l$ in Eq.~\eqref{eq:RBF_kernel}). 
 
 The composition of transformations can be represented as:
 \begin{IEEEeqnarray}{rCl}
@@ -292,13 +292,14 @@ Starting from the base kernel with parameter $\sigma^2$ and $l$,
 \end{IEEEeqnarray}
 we transform the input $\mathbf{s}$ as:
 \begin{IEEEeqnarray}{rCl}
-  k(\mathbf{s}_i, \mathbf{s}_j;\sigma, l) \rightarrow k(f(\mathbf{s}_i;\mathbf{W}), f(\mathbf{s}_j;\mathbf{W}); \sigma,l, \mathbf{W})
+  k(\mathbf{s}_i, \mathbf{s}_j;\sigma, l) \rightarrow k(f(\mathbf{s}_i;\mathbf{W}), f(\mathbf{s}_j;\mathbf{W}); \sigma,l, \mathbf{W}),
   \label{eq:trans_kernel}
 \end{IEEEeqnarray}
-where $f(\mathbf{s};\mathbf{W})$ is the composition non-linear mapping parameterized by $\mathbf{W}$. We use NLML, from Eq.~\eqref{eq:nlml},\eqref{eq:kernel_plus_i}, and \eqref{eq:trans_kernel}, as the loss function to train the model. SSI results are obtained from Eq.~\eqref{eq:predictive_distribution}. Its of great beneficial that the predictive distribution not only give the inference result but also provide the uncertainty quantification.
+where $f(\mathbf{s};\mathbf{W})$ is the composition non-linear mapping parameterized by $\mathbf{W}$. We utilize NLML, from Eq.~\eqref{eq:nlml},\eqref{eq:kernel_plus_i}, and \eqref{eq:trans_kernel}, as the loss function to train the model. SSI results are obtained from Eq.~\eqref{eq:predictive_distribution}. Its of great beneficial that the predictive distribution not only give the inference result but also provide the uncertainty quantification.
 
-We assessed the performance of NN, IDWNN, OK, GP, and the proposed TKL method with different numbers of crowd-sourced sensors evenly distributed in an area of 1km by 1km. In all cases, SSI performance was assessed by evaluating on a grid of $180\times180$ points covering the area of interest. The performance metrics include the RMSE and the CRPS\cite{Gneiting2007}.
-The performance of different algorithms are demonstrated in Fig.~\ref{fig:rmse} and Fig.~\ref{fig:crps}. The RMSE of the GP and the OK algorithm are roughly the same, while the CRPS of GP is better. The TKL method outperforms all other algorithms in terms of both RMSE and CRPS when the number of crowd-sourced sensors is greater than 400. In our experiment, the crowd-sourced sensors are evenly distributed in the area. When there are few crowd-sourced sensors, the sensors in the local area can not capture the heterogeneity of the environment. Meanwhile, during the model training, we find that the TKL method is not prone to overfitting.
+We use simulated data to assess the performance of NN, IDWNN, OK, GP, and the proposed TKL method. In an area of 1km by 1km, we simulated the shadow fading component of $180\times180$ points covering the area and chose points evenly distributed in the area as the crowd-sourced sensor data. REM of the area is recovered from sensor data with different algorithms. RMSE and CRPS are calculated by comparing with the true shadow fading component.
+
+The performance of different algorithms are demonstrated in Fig.~\ref{fig:rmse} and Fig.~\ref{fig:crps}. The RMSE of the GP and the OK algorithm are roughly the same, while the CRPS of GP is better. The proposed TKL method outperforms all other algorithms in terms of both RMSE and CRPS when the number of crowd-sourced sensors is greater than 400. Meanwhile, during the model training, we find that the TKL method is not prone to overfitting. The lack of performance, when the amount of crowd-sourced sensors is small, is because too few sensors in the local area can not capture the heterogeneity of the environment. 
 
 \begin{figure}[!tb]
   \centering
@@ -316,7 +317,7 @@ The performance of different algorithms are demonstrated in Fig.~\ref{fig:rmse} 
 % Here, we will evaluate the performance of the proposed algorithm with the CRAWDAD cu/WiMAX datasets \cite{Ton2012}, which was also used in \cite{Phillips2012} and \cite{Hu2020}. The cu/wimax datasets was collected at the University of Colorado Boulder. It contains careful point measurements of the Wimax network serving the campus. We investigate the ``first phase'' sample, which were taken on a 100m equilateral triangular lattice.
 
 \section{Conclusion}
-In this letter, a TKL method that considers environmental heterogeneity is proposed to deal with the SSI problem. The main idea is to construct nonlinear injective transformations parameterized by parameters $\mathbf{W}$ to represent the spatial anisotropy and nonstationarity. By training the TKGPR model with kernel transformed by the nonlinear mapping, we can learn the parameters of both nonlinear mapping and the GP. Then, the TKGPR model can be used for SSI. The idea of TKL is inspired by the DKL method. However, it has the following advantages: First, different from the transformation of DNN in DKL, they can keep the topology structure of the space.  Second, It is not prone to overfitting during the training procedure. The results show a considerable performance improvement when there are plenty numbers of crowd-sourced sensors.
+In this letter, a TKL method that considers environmental heterogeneity is proposed to deal with the SSI problem. The main idea is to construct nonlinear injective transformations parameterized by parameters $\mathbf{W}$ to represent the spatial anisotropy and nonstationarity. By training the TKGPR model with kernel transformed by the nonlinear mapping, we can learn the parameters of both nonlinear mapping and the GP. Then, the TKGPR model can be used for SSI. The idea of TKL is inspired by the DKL method. However, it has the following advantages. First, different from the transformation of DNN in DKL, they can keep the topology structure of the space.  Second, It is not prone to overfitting during the training procedure. The results show a considerable performance improvement when there are plenty numbers of crowd-sourced sensors.
 
 \ifCLASSOPTIONcaptionsoff
   \newpage
