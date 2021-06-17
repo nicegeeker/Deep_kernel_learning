@@ -1,7 +1,19 @@
 
+@article{Agrawal2009,
+  title = {Correlated Link Shadow Fading in Multi-Hop Wireless Networks},
+  author = {Agrawal, Piyush and Patwari, Neal},
+  year = {2009},
+  month = aug,
+  volume = {8},
+  pages = {4024--4036},
+  publisher = {{Institute of Electrical and Electronics Engineers (IEEE)}},
+  doi = {10.1109/twc.2009.071293},
+  journal = {IEEE Trans. Wireless Commun.},
+  number = {8}
+}
+
 @inproceedings{Amin2020,
   title = {Geo-{{Indistinguishablility}} for {{Crowdsourced}}-{{Based Radio Environment Map Construction}}},
-  booktitle = {{{GLOBECOM}} 2020 - 2020 {{IEEE Global Communications Conference}}},
   author = {Amin, Shahira and Li, Liang and Guo, Yuanxiong and Pan, Miao and Gong, Yanmin},
   year = {2020},
   month = dec,
@@ -9,7 +21,7 @@
   publisher = {{IEEE}},
   address = {{Taipei, Taiwan}},
   doi = {10.1109/GLOBECOM42002.2020.9348142},
-  isbn = {978-1-72818-298-8}
+  booktitle = {{{GLOBECOM}}}
 }
 
 @article{Blei2017,
@@ -18,18 +30,35 @@
   year = {2017},
   volume = {112},
   pages = {859--877},
-  issn = {1537274X},
   doi = {10.1080/01621459.2017.1285773},
-  abstract = {One of the core problems of modern statistics is to approximate difficult-to-compute probability densities. This problem is especially important in Bayesian statistics, which frames all inference about unknown quantities as a calculation involving the posterior density. In this article, we review variational inference (VI), a method from machine learning that approximates probability densities through optimization. VI has been used in many applications and tends to be faster than classical methods, such as Markov chain Monte Carlo sampling. The idea behind VI is to first posit a family of densities and then to find a member of that family which is close to the target density. Closeness is measured by Kullback\textendash Leibler divergence. We review the ideas behind mean-field variational inference, discuss the special case of VI applied to exponential family models, present a full example with a Bayesian mixture of Gaussians, and derive a variant that uses stochastic optimization to scale up to massive data. We discuss modern research in VI and highlight important open problems. VI is powerful, but it is not yet well understood. Our hope in writing this article is to catalyze statistical research on this class of algorithms. Supplementary materials for this article are available online.},
   archiveprefix = {arXiv},
   arxivid = {1601.00670},
   eprint = {1601.00670},
   eprinttype = {arxiv},
-  file = {/home/nicegeek/Google Drive/Research_Hub/Blei - 2017 - Variational Inference_ a Review for Statisticians.pdf},
   journal = {J. Am. Stat. Assoc.},
-  keywords = {Algorithms,Computationally intensive methods,Statistical computing},
   number = {518},
   primaryclass = {stat.CO}
+}
+
+@article{Calandra2016,
+  title = {Manifold {{Gaussian Processes}} for {{Regression}}},
+  author = {Calandra, Roberto and Peters, Jan and Rasmussen, Carl Edward and Deisenroth, Marc Peter},
+  year = {2016},
+  month = apr,
+  archiveprefix = {arXiv},
+  eprint = {1402.5876},
+  eprinttype = {arxiv},
+  journal = {ArXiv14025876 Cs Stat},
+  primaryclass = {cs, stat}
+}
+
+@incollection{Cho2010,
+  title = {The Wireless Channel: {{Propagation}} and Fading},
+  booktitle = {{{MIMO}}-{{OFDM}} Wireless Communications with {{MATLAB}}},
+  author = {Cho, Yong Soo and Kim, Jaekwon and Yang, Won Y. and Kang, Chung G.},
+  year = {2010},
+  pages = {4--8},
+  publisher = {{John Wiley \& Sons}}
 }
 
 @article{DallAnese2011,
@@ -40,26 +69,24 @@
   volume = {60},
   pages = {1205--1211},
   publisher = {{IEEE}},
-  issn = {0018-9545},
   doi = {10.1109/TVT.2011.2113195},
-  abstract = {A collaborative algorithm is developed to estimate the channel gains of wireless links in a geographical area. The spatiotemporal evolution of shadow fading is characterized by judiciously extending an experimentally verified spatial-loss field model. Kriged Kalman filtering (KKF), which is a tool with widely appreciated merits in spatial statistics and geosciences, is adopted and implemented in a distributed fashion to track the time-varying shadowing field using a network of radiometers. The novel distributed KKF requires only local message passing yet achieves a global view of the radio frequency environment through consensus iterations. Numerical tests demonstrate superior tracking accuracy of the collaborative algorithm compared with its noncollaborative counterpart. Furthermore, the efficacy of the global channel gain knowledge obtained is showcased in the context of cognitive radio resource allocation.},
-  file = {/home/nicegeek/Google Drive/Research_Hub/Dall'Anese, Kim, Giannakis - 2011 - Channel Gain Map Tracking via Distributed Kriging.pdf},
   journal = {IEEE Trans. Veh. Technol.},
-  keywords = {Channel tracking,cognitive radio,distributed algorithms,kriging,shadow fading},
-  number = {3},
-  readstatus = {read}
+  number = {3}
 }
 
 @inproceedings{Damianou2013,
   title = {Deep {{Gaussian}} Processes},
-  booktitle = {Proc. 16th {{AISTAT}}},
-  author = {Damianou, Andreas C. and Lawrence, Neil D.},
+  author = {Damianou, Andreas and Lawrence, Neil D.},
+  editor = {Carvalho, Carlos M. and Ravikumar, Pradeep},
   year = {2013},
+  month = apr,
   volume = {31},
-  issn = {1938-7228},
-  abstract = {In this paper we introduce deep Gaussian process (GP) models. Deep GPs are a deep belief net- work based on Gaussian process mappings. The data is modeled as the output of a multivariate GP. The inputs to that Gaussian process are then governed by another GP. A single layer model is equivalent to a standard GP or the GP latent vari- able model (GP-LVM). We perform inference in the model by approximate variational marginal- ization. This results in a strict lower bound on the marginal likelihood of the model which we use for model selection (number of layers and nodes per layer). Deep belief networks are typically ap- plied to relatively large data sets using stochas- tic gradient descent for optimization. Our fully Bayesian treatment allows for the application of deep models even when data is scarce. Model selection by our variational bound shows that a five layer hierarchy is justified even when modelling a digit data set containing only 150 examples.},
-  file = {/home/nicegeek/Google Drive/Research_Hub/Damianou, Lawrence - 2013 - Deep Gaussian Processes.pdf},
-  keywords = {⛔ No DOI found}
+  pages = {207--215},
+  publisher = {{PMLR}},
+  address = {{Scottsdale, Arizona, USA}},
+  pdf = {http://proceedings.mlr.press/v31/damianou13a.pdf},
+  series = {Proceedings of Machine Learning Research},
+  booktitle = {Int. {{Conf}}. {{Artif}}. {{Intell}}. {{Stat}}.}
 }
 
 @article{Ding2014,
@@ -70,15 +97,9 @@
   volume = {62},
   pages = {3129--3143},
   publisher = {{IEEE}},
-  issn = {0090-6778},
   doi = {10.1109/tcomm.2014.2346775},
-  abstract = {This paper investigates the issue of cooperative spectrum sensing with a crowd of low-end personal spectrum sensors (such as smartphones, tablets, and in-vehicle sensors), where one critical challenge is the uncertainty of the quality of sensing data from crowd sensors that may be unreliable, untrustworthy, or even malicious. Moreover, due to either unexpected equipment failures or malicious behaviors, every crowd sensor could sporadically and randomly contribute abnormal data, which makes the existing defense schemes ineffective. To tackle these unique challenges, we propose a robust spectrum sensing scheme by developing a data cleansing framework, where the underutilization of licensed spectrum bands and the sparsity of nonzero abnormal data are jointly exploited to robustly cleanse out the potential nonzero abnormal data component from the original corrupted sensing data. Simulation results demonstrate that the proposed robust sensing scheme outperforms the state-of-art schemes under various abnormal data parameter configurations},
-  file = {/home/nicegeek/Google Drive/Research_Hub/Ding et al. - 2014 - Robust Spectrum Sensing With Crowd Sensors.pdf},
-  isbn = {978-1-4799-4449-1},
   journal = {IEEE Trans. Commun.},
-  keywords = {Cognitive radio networks,crowdsourcing,data cleansing,data quality,spectrum sensing},
-  number = {9},
-  readstatus = {read}
+  number = {9}
 }
 
 @article{Ding2018,
@@ -88,28 +109,21 @@
   volume = {20},
   pages = {150--182},
   publisher = {{Institute of Electrical and Electronics Engineers (IEEE)}},
-  issn = {1553-877X},
   doi = {10.1109/comst.2017.2751058},
-  abstract = {Spectrum inference, also known as spectrum prediction in the literature, is a promising technique of inferring the occupied/free state of radio spectrum from already known/measured spectrum occupancy statistics by effectively exploiting the inherent correlations among them. In the past few years, spectrum inference has gained increasing attention owing to its wide applications in cognitive radio networks (CRNs), ranging from adaptive spectrum sensing, and predictive spectrum mobility, to dynamic spectrum access and smart topology control, to name just a few. In this paper, we provide a comprehensive survey and tutorial on the recent advances in spectrum inference. Specifically, we first present the preliminaries of spectrum inference, including the sources of spectrum occupancy statistics, the models of spectrum usage, and characterize the predictability of spectrum state evolution. By introducing the taxonomy of spectrum inference from a time-frequency-space perspective, we offer an in-depth tutorial on the existing algorithms. Furthermore, we provide a comparative analysis of various spectrum inference algorithms and discuss the metrics of evaluating the efficiency of spectrum inference. We also portray the various potential applications of spectrum inference in CRNs and beyond, with an outlook to the fifth-generation mobile communications and next generation high frequency communications systems. Last but not least, we highlight the critical research challenges and open issues ahead.},
-  file = {/home/nicegeek/Google Drive/Research_Hub/Ding et al. - 2018 - Spectrum Inference in Cognitive Radio Networks Algorithms and Applications.pdf},
   journal = {IEEE Commun. Surveys Tuts.},
-  keywords = {5G,cognitive radio,HF communications,Spectrum inference,spectrum prediction},
-  number = {1},
-  readstatus = {read}
+  number = {1}
 }
 
-@article{Dunlop2017,
-  title = {How Deep Are Deep {{Gaussian}} Processes?},
+@article{Dunlop2018,
+  title = {How {{Deep Are Deep Gaussian Processes}}?},
   author = {Dunlop, Matthew M. and Girolami, Mark A. and Stuart, Andrew M. and Teckentrup, Aretha L.},
-  year = {2017-11-30, 2017-11},
-  abstract = {Recent research has shown the potential utility of Deep Gaussian Processes. These deep structures are probability distributions, designed through hierarchical construction, which are conditionally Gaussian. In this paper, the current published body of work is placed in a common framework and, through recursion, several classes of deep Gaussian processes are defined. The resulting samples generated from a deep Gaussian process have a Markovian structure with respect to the depth parameter, and the effective depth of the resulting process is interpreted in terms of the ergodicity, or non-ergodicity, of the resulting Markov chain. For the classes of deep Gaussian processes introduced, we provide results concerning their ergodicity and hence their effective depth. We also demonstrate how these processes may be used for inference; in particular we show how a Metropolis-within-Gibbs construction across the levels of the hierarchy can be used to derive sampling tools which are robust to the level of resolution used to represent the functions on a computer. For illustration, we consider the effect of ergodicity in some simple numerical examples.},
+  year = {2018},
+  month = aug,
   archiveprefix = {arXiv},
-  eid = {arXiv:1711.11280},
   eprint = {1711.11280},
   eprinttype = {arxiv},
-  file = {/home/nicegeek/Google Drive/Research_Hub/Dunlop - 2017 - How Deep Are Deep Gaussian Processes_.pdf},
-  keywords = {⛔ No DOI found,Mathematics - Statistics Theory},
-  primaryclass = {math.ST}
+  journal = {ArXiv171111280 Math Stat},
+  primaryclass = {math, stat}
 }
 
 @phdthesis{Duvenaud2014a,
@@ -118,13 +132,47 @@
   year = {2014},
   pages = {144},
   doi = {10.17863/CAM.14087},
-  abstract = {This work was supported by the National Sciences and Engineering Research Council of Canada, the Cambridge Commonwealth Trust, Pembroke College, a grant from the Engineering and Physical Sciences Research Council, and a grant from Google.},
   copyright = {Attribution-ShareAlike 2.0 UK: England \& Wales},
-  file = {/home/nicegeek/Google Drive/Research_Hub/Duvenaud - 2014 - Automatic Model Construction with Gaussian Processes.pdf},
-  keywords = {Forecasting,FOS: Mathematics,Gaussian processes,Machine learning,Model building,Statistics,Time series},
   language = {English},
   number = {June},
   school = {University of Cambridge}
+}
+
+@article{Gardner2019,
+  title = {{{GPyTorch}}: {{Blackbox Matrix}}-{{Matrix Gaussian Process Inference}} with {{GPU Acceleration}}},
+  shorttitle = {{{GPyTorch}}},
+  author = {Gardner, Jacob R. and Pleiss, Geoff and Bindel, David and Weinberger, Kilian Q. and Wilson, Andrew Gordon},
+  year = {2019},
+  month = jan,
+  archiveprefix = {arXiv},
+  eprint = {1809.11165},
+  eprinttype = {arxiv},
+  journal = {ArXiv180911165 Cs Stat},
+  primaryclass = {cs, stat}
+}
+
+@article{Gneiting2007,
+  title = {Strictly Proper Scoring Rules, Prediction, and Estimation},
+  author = {Gneiting, Tilmann and Raftery, Adrian E.},
+  year = {2007},
+  month = mar,
+  volume = {102},
+  pages = {359--378},
+  doi = {10.1198/016214506000001437},
+  journal = {J. Amer. Statist. Assoc.},
+  mendeley-groups = {000 math,Spatial Statistics},
+  number = {477}
+}
+
+@article{Gudmundson1991,
+  title = {Correlation Model for Shadow Fading in Mobile Radio Systems},
+  author = {Gudmundson, M.},
+  year = {1991},
+  volume = {27},
+  pages = {2145},
+  doi = {10.1049/el:19911328},
+  journal = {Electron. Lett.},
+  number = {23}
 }
 
 @article{Han2019,
@@ -132,10 +180,7 @@
   author = {Han, Zhifeng and Liao, Jianxin and Qi, Qi and Sun, Haifeng and Wang, Jingyu},
   year = {2019},
   volume = {2019},
-  issn = {15308677},
   doi = {10.1155/2019/4064201},
-  abstract = {In the IoT era, 5G will enable various IoT services such as broadband access everywhere, high user and devices mobility, and connectivity of massive number of devices. Radio environment map (REM) can be applied to improve the utilization of radio resources for the access control of IoT devices by allocating them reasonable wireless spectrum resources. However, the primary problem of constructing REM is how to collect the large scale of data. Mobile crowd sensing (MCS), leveraging the smart devices carried by ordinary people to collect information, is an effective solution for collecting the radio environment information for building the REM. In this paper, we build a REM collecting prototype system based on MCS to collect the data required by the radio environment information. However, limited by the budget of the platform, it is hard to recruit enough participants to join the sensing task to collect the radio environment information. This will make the radio environment information of the sensing area incomplete, which cannot describe the radio information accuracy. Considering that the Kriging algorithm has been widely used in geostatistics principle for spatial interpolation for Kriging giving the best unbiased estimate with minimized variance, we utilize the Kriging interpolation algorithm to infer complete radio environment information from collected sample radio environment information data. The interpolation performance is analyzed based on the collected sample radio environment information data. We demonstrate experiments to analyze the Kriging interpolation algorithm interpolation results and error and compared them with the nearest neighbor (NN) and the inverse distance weighting (IDW) interpolation algorithms. Experiment results show that the Kriging algorithm can be applied to infer radio environment information data based on the collected sample data and the Kriging interpolation has the least interpolation error.},
-  file = {/home/nicegeek/Google Drive/Research_Hub/Han et al. - 2019 - Radio environment map construction by kriging algorithm based on mobile crowd sensing.pdf},
   journal = {Wirel. Commun. Mob. Comput.}
 }
 
@@ -145,29 +190,21 @@
   year = {2005},
   volume = {23},
   pages = {201--220},
-  issn = {07338716},
   doi = {10.1109/JSAC.2004.839380},
-  abstract = {Cognitive radio is viewed as a novel approach for improving the utilization of a precious natural resource: the radio electromagnetic spectrum. The cognitive radio, built on a software-defined radio, is defined as an intelligent wireless communication system that is aware of its environment and uses the methodology of understanding-by-building to learn from the environment and adapt to statistical variations in the input stimuli, with two primary objectives in mind: highly reliable communication whenever and wherever needed; efficient utilization of the radio spectrum. Following the discussion of interference temperature as a new metric for the quantification and management of interference, the paper addresses three fundamental cognitive tasks. 1) Radio-scene analysis. 2) Channel-state estimation and predictive modeling. 3) Transmit-power control and dynamic spectrum management. This paper also discusses the emergent behavior of cognitive radio.},
-  file = {/home/nicegeek/Google Drive/Research_Hub/Haykin - 2005 - Cognitive radio brain-empowered wireless communications.pdf},
   journal = {IEEE J. Sel. Areas Commun.},
-  keywords = {Awareness,Channel-state estimation and predictive modeling,Cognition,Competition and cooperation,Emergent behavior,Interference temperature,Machine learning,Radio-scene analysis,Rate feedback,Spectrum analysis,Spectrum holes,Spectrum management},
-  number = {2},
-  readstatus = {read}
+  number = {2}
 }
 
-@article{Hu2019,
-  title = {Differentially-Private Incentive Mechanism for Crowdsourced Radio Environment Map Construction},
+@inproceedings{Hu2019,
+  title = {Differentially-{{Private Incentive Mechanism}} for {{Crowdsourced Radio Environment Map Construction}}},
   author = {Hu, Yidan and Zhang, Rui},
   year = {2019},
-  volume = {2019-April},
+  month = apr,
   pages = {1594--1602},
   publisher = {{IEEE}},
-  issn = {0743166X},
-  doi = {10.1109/infocom.2019.8737512},
-  abstract = {Database-driven Dynamic Spectrum Sharing (DSS) is a promising technical paradigm for enhancing spectrum efficiency by allowing secondary user to opportunistically access licenced spectrum channels without interfering with primary users' transmissions. In database-driven DSS, a geo-location database administrator (DBA) maintains the spectrum availability in its service region in the form of a radio environment map (REM) and grant or deny secondary users' spectrum access requests based on primary users' activities. Crowdsourcing-based spectrum sensing has great potential in improving the accuracy of the REM at the DBA but requires strong incentives and privacy protection to simulate mobile users' participation. To tackle this challenge, this paper introduces a novel differentially-private reverse auction mechanism for crowdsourcing-based spectrum sensing. The proposed mechanism allows the DBA to select spectrum sensing participants under a budget constraint while offering differential bid privacy, approximate truthfulness, and approximate accuracy maximization. Extensive simulation studies using a real spectrum measurement dataset confirm the efficacy and efficiency of the proposed mechanism.},
-  file = {/home/nicegeek/Google Drive/Research_Hub/Hu, Zhang - 2019 - Differentially-Private Incentive Mechanism for Crowdsourced Radio Environment Map Construction.pdf;/home/nicegeek/Google Drive/Research_Hub/Hu, Zhang - 2019 - Differentially-Private Incentive Mechanism for Crowdsourced Radio Environment Map Construction.pdf},
-  isbn = {9781728105154},
-  journal = {Proc. - IEEE INFOCOM}
+  address = {{Paris, France}},
+  doi = {10.1109/INFOCOM.2019.8737512},
+  booktitle = {{{IEEE INFOCOM}}}
 }
 
 @article{Hu2020,
@@ -178,9 +215,7 @@
   volume = {28},
   pages = {1790--1803},
   publisher = {{Institute of Electrical and Electronics Engineers (IEEE)}},
-  issn = {1063-6692},
   doi = {10.1109/tnet.2020.2992939},
-  file = {/home/nicegeek/Google Drive/Research_Hub/Hu, Zhang - 2020 - A Spatiotemporal Approach for Secure Crowdsourced Radio Environment Map Construction.pdf},
   journal = {IEEE/ACM Trans. Netw.},
   number = {4}
 }
@@ -192,53 +227,44 @@
   month = jun,
   volume = {26},
   pages = {1236--1249},
-  issn = {1063-6692, 1558-2566},
   doi = {10.1109/TNET.2018.2823272},
-  file = {/home/nicegeek/Google Drive/Research_Hub/Jin_Zhang - 2018 - Privacy-Preserving Crowdsourced Spectrum Sensing.pdf},
   journal = {IEEE/ACM Trans. Networking},
   number = {3}
 }
 
 @inproceedings{Katagiri2020,
   title = {Radio Environment Map Updating Procedure Considering Change of Surrounding Environment},
-  booktitle = {{{IEEE WCNC Workshops}}},
   author = {Katagiri, Keita and Fujii, Takeo},
   year = {2020},
   month = apr,
   publisher = {{IEEE}},
   doi = {10.1109/wcncw48565.2020.9124802},
-  abstract = {In this paper, we propose a method to update a radio environment map (REM) considering change of surrounding environment. The REM provides statistical radio information of primary users (PUs) to secondary users (SUs). SUs can utilize the information to design communication parameters for improving communication efficiency. However, if surrounding environment changes, the newly observed datasets are significantly different from the initially observed datasets. The database server requires to detect change of surrounding environment and to update the REM based on the detected results. In this paper, we propose a method to update the REM based on hypothesis testing. In the proposed method, sensor nodes observe a received signal strength indicator (RSSI) in each location and report that to the database server. Then, the database server updates the REM using tested results. The simulation results show that the proposed method can detect change of surrounding environment and accurately predict the average RSSI in each location while significantly reducing the number of the REM updates.},
-  file = {/home/nicegeek/Google Drive/Research_Hub/Katagiri, Fujii - 2020 - Radio Environment Map Updating Procedure Considering Change of Surrounding Environment.pdf},
-  isbn = {978-1-72815-178-6},
-  keywords = {Radio Environment Map,Spectrum Database,Statistical Hypothesis Testing},
-  readstatus = {read}
+  booktitle = {{{IEEE WCNC Workshops}}}
 }
 
-@article{Koriyama2020,
+@article{Koriyama2020a,
   title = {An Introduction of {{Gaussian}} Processes and Deep {{Gaussian}} Processes and Their Applications to Speech Processing},
   author = {Koriyama, Tomoki},
   year = {2020},
   month = mar,
   volume = {41},
   pages = {457--464},
-  publisher = {{Acoustical Society of Japan}},
   doi = {10.1250/ast.41.457},
-  file = {/home/nicegeek/Google Drive/Research_Hub/Koriyama - 2020 - An Introduction of Gaussian Processes and Deep Gaussian Processes and Their Applications to Speech Processing.pdf},
-  journal = {Acoust. Sci. Technol.},
-  number = {2},
-  readstatus = {read}
+  journal = {Acoust. Sci. \& Tech.},
+  language = {en},
+  number = {2}
 }
 
-@unpublished{Lee2018,
-  title = {Deep Neural Networks as {{Gaussian}} Processes},
+@article{Lee2018,
+  title = {Deep {{Neural Networks}} as {{Gaussian Processes}}},
   author = {Lee, Jaehoon and Bahri, Yasaman and Novak, Roman and Schoenholz, Samuel S. and Pennington, Jeffrey and {Sohl-Dickstein}, Jascha},
   year = {2018},
-  abstract = {It has long been known that a single-layer fully-connected neural network with an i.i.d. prior over its parameters is equivalent to a Gaussian process (GP), in the limit of infinite network width. This correspondence enables exact Bayesian inference for infinite width neural networks on regression tasks by means of evaluating the corresponding GP. Recently, kernel functions which mimic multi-layer random neural networks have been developed, but only outside of a Bayesian framework. As such, previous work has not identified that these kernels can be used as covariance functions for GPs and allow fully Bayesian prediction with a deep neural network. In this work, we derive the exact equivalence between infinitely wide deep networks and GPs. We further develop a computationally efficient pipeline to compute the covariance function for these GPs. We then use the resulting GPs to perform Bayesian inference for wide deep neural networks on MNIST and CIFAR-10. We observe that trained neural network accuracy approaches that of the corresponding GP with increasing layer width, and that the GP uncertainty is strongly correlated with trained network prediction error. We further find that test performance increases as finite-width trained networks are made wider and more similar to a GP, and thus that GP predictions typically outperform those of finite-width networks. Finally we connect the performance of these GPs to the recent theory of signal propagation in random neural networks.},
+  month = mar,
   archiveprefix = {arXiv},
-  arxivid = {1711.00165},
   eprint = {1711.00165},
   eprinttype = {arxiv},
-  file = {/home/nicegeek/Google Drive/Research_Hub/Lee et al. - 2018 - Deep neural networks as Gaussian processes.pdf}
+  journal = {ArXiv171100165 Cs Stat},
+  primaryclass = {cs, stat}
 }
 
 @incollection{Li2018,
@@ -249,12 +275,7 @@
   volume = {226 LNICST},
   pages = {247--257},
   publisher = {{Springer International Publishing}},
-  issn = {18678211},
-  doi = {10.1007/978-3-319-73564-1_25},
-  abstract = {Electromagnetic spectrum, the main medium of wireless communication has been over-crowded. Accompanied by the arrival of big data era, the problem of the spectrum scarcity has received people's attention. The emergence of cognitive radio improves the utilization of the spectrum and provides an effective solution to break the limitations of the traditional static allocation. Radio Environmental Maps (REM) is an enabling technology of cognitive radio which can be intuitive, multi-dimensional display of spectrum information. It provides a visual basis while accessing dynamic spectrum and sharing spectrum. In this paper, the various aspects of REM are studied from the perspective of cognitive radio. Based on the concept of REM, the recent research progress of REM is summarized, and a series of challenges in the construction of spectrum pattern are also highlighted.},
-  file = {/home/nicegeek/Google Drive/Research_Hub/Li et al. - 2018 - Recent advances in radio environment map A survey.pdf},
-  isbn = {978-3-319-73563-4},
-  keywords = {Cognitive radio,Radio environment map,Spectrum dynamic access,Spectrum sharing,Spectrum trend}
+  doi = {10.1007/978-3-319-73564-1_25}
 }
 
 @article{Mitola1999,
@@ -263,26 +284,55 @@
   year = {1999},
   volume = {6},
   pages = {13--18},
-  issn = {1070-9916},
   doi = {10.1109/98.788210},
-  abstract = {Software radios are emerging as platforms for multiband multimode personal communications systems. Radio etiquette is the set of RF bands, air interfaces, protocols, and spatial and temporal patterns that moderate the use of the radio spectrum. Cognitive radio extends the software radio with radio-domain model-based reasoning about such etiquettes. Cognitive radio enhances the flexibility of personal services through a radio knowledge representation language. This language represents knowledge of radio etiquette, devices, software modules, propagation, networks, user needs, and application scenarios in a way that supports automated reasoning about the needs of the user. This empowers software radios to conduct expressive negotiations among peers about the use of radio spectrum across fluents of space, time, and user context. With RKRL, cognitive radio agents may actively manipulate the protocol stack to adapt known etiquettes to better satisfy the user's needs. This transforms radio nodes from blind executors of predefined protocols to radio-domain-aware intelligent agents that search out ways to deliver the services the user wants even if that user does not know how to obtain them. Software radio provides an ideal platform for the realization of cognitive radio},
-  file = {/home/nicegeek/Google Drive/Research_Hub/Mitola, Maguire - 1999 - Cognitive radio making software radios more personal.pdf},
-  journal = {IEEE Pers. Commun.},
-  readstatus = {read}
+  journal = {IEEE Pers. Commun.}
 }
 
-@inproceedings{Naikwadi2020,
-  title = {A Survey of Artificial Neural Network Based Spectrum Inference for Occupancy Prediction in Cognitive Radio Networks},
-  booktitle = {Proc. 4th {{ICOEI}}},
+@inproceedings{Naikwadi2020a,
+  title = {A {{Survey}} of {{Artificial Neural Network}} Based {{Spectrum Inference}} for {{Occupancy Prediction}} in {{Cognitive Radio Networks}}},
   author = {Naikwadi, Mudassar H. and Patil, Kishor P.},
   year = {2020},
+  month = jun,
   pages = {903--908},
+  publisher = {{IEEE}},
+  address = {{Tirunelveli, India}},
   doi = {10.1109/ICOEI48184.2020.9143053},
-  abstract = {Spectrum being a natural resource is always limited in availability. Its use needs to be intelligently managed for maximum benefits, hence the idea of Cognitive Radio. If the occupied or free status of spectrum band can be predicted or inferred from existing spectrum measurement data then this technique improves spectrum efficiency. This technique called Spectrum Inference/Prediction is a valuable tool to harness the spectrum effectively. This paper gives a recent survey of existing spectrum inference techniques for spectrum occupancy prediction with focus being on Artificial Neural Network (ANN) based schemes. First the statistical spectrum occupancy modeling methods are compared with machine learning based methods and described briefly the various neural networks in the purview of ANNs. The recent trend towards the use of hybrid neural network models has been detailed by acknowledging the contribution of research in this area. The various algorithms have been weighed over performance measure metrics, dimensions, type of data and measurement set-up employed. Finally the significant research been directed towards the use of deep learning techniques proven its efficiency in this field are also noted.},
-  file = {/home/nicegeek/Google Drive/Research_Hub/Naikwadi, Patil - 2020 - A Survey of Artificial Neural Network based Spectrum Inference for Occupancy Prediction in Cognitive Radio Netw.pdf},
-  isbn = {978-1-72815-518-0},
-  keywords = {Artificial Neural Networks,deep learning,hybrid neural networks,Spectrum inference},
-  series = {Proceedings of the 4th {{International Conference}} on {{Trends}} in {{Electronics}} and {{Informatics}}, {{ICOEI}} 2020}
+  booktitle = {{{ICOEI}}}
+}
+
+@article{Ober2021,
+  title = {The {{Promises}} and {{Pitfalls}} of {{Deep Kernel Learning}}},
+  author = {Ober, Sebastian W. and Rasmussen, Carl E. and {van der Wilk}, Mark},
+  year = {2021},
+  month = feb,
+  archiveprefix = {arXiv},
+  eprint = {2102.12108},
+  eprinttype = {arxiv},
+  journal = {ArXiv210212108 Cs Stat},
+  primaryclass = {cs, stat}
+}
+
+@article{Olsen2010,
+  title = {The {{Geometry}} of {{M\"obius Transformations}}},
+  author = {Olsen, John},
+  year = {2010},
+  pages = {37},
+  journal = {Univ. Rochester},
+  language = {en}
+}
+
+@inproceedings{Perrin1999,
+  title = {Modelling of {{Non}}-{{Stationary Spatial Structure Using Parametric Radial Basis Deformations}}},
+  booktitle = {{{geoENV II}} \textemdash{} {{Geostatistics}} for {{Environmental Applications}}},
+  author = {Perrin, O. and Monestiez, P.},
+  editor = {{G{\'o}mez-Hern{\'a}ndez}, Jaime and Soares, Am{\'i}lcar and Froidevaux, Roland},
+  year = {1999},
+  pages = {175--186},
+  publisher = {{Springer Netherlands}},
+  address = {{Dordrecht}},
+  doi = {10.1007/978-94-015-9297-0_15},
+  language = {en},
+  series = {Quantitative {{Geology}} and {{Geostatistics}}}
 }
 
 @article{Pesko2014,
@@ -292,36 +342,51 @@
   month = nov,
   volume = {8},
   publisher = {{Korean Society for Internet Information (KSII)}},
-  issn = {1976-7277},
   doi = {10.3837/tiis.2014.11.008},
-  file = {/home/nicegeek/Google Drive/Research_Hub/Pesko et al. - 2014 - Radio Environment Maps The Survey of Construction Methods.pdf},
   journal = {KSII Trans. Internet Inf. Syst.},
-  number = {11},
-  readstatus = {read}
+  number = {11}
 }
 
 @inproceedings{Phillips2012,
   title = {Practical Radio Environment Mapping with Geostatistics},
-  booktitle = {{{IEEE}} Int. {{Symp}}. {{Dyn}}. {{Spectr}}. {{Access}} Networks},
   author = {Phillips, Caleb and Ton, Michael and Sicker, Douglas and Grunwald, Dirk},
   year = {2012},
   month = oct,
   pages = {422--433},
   publisher = {{IEEE}},
-  doi = {10.1109/dyspan.2012.6478166},
-  abstract = {In this paper we present results from the first application of robust geostatistical modeling techniques to radio environment and coverage mapping of wireless networks. We perform our analysis of these methods with a case study mapping the coverage of a 2.5 GHz WiMax network at the University of Colorado, Boulder. Drawing from our experiences, we propose several new methods and extensions to basic geostatistical theory that are necessary for use in a radio mapping application. We also derive a set of best practices and discuss potential areas of future work. We find that this approach to radio environment mapping is feasible and produces maps that are more accurate and informative than both explicitly tuned path loss models and basic data fitting approaches. \textcopyright{} 2012 IEEE.},
-  file = {/home/nicegeek/Google Drive/Research_Hub/Phillips et al. - 2012 - Practical radio environment mapping with geostatistics.pdf},
-  isbn = {978-1-4673-4448-7}
+  address = {{Bellevue, WA, USA}},
+  doi = {10.1109/DYSPAN.2012.6478166},
+  booktitle = {{{IEEE Int}}. {{Symp}}. {{Dyn}}. {{Spectr}}. {{Access Networks}}}
 }
 
-@inproceedings{Salimbeni2017a,
-  title = {Deeply Non-Stationary {{Gaussian}} Processes},
-  booktitle = {Proc. {{NIPS}} Workshop Bayesian Deep Learning},
-  author = {Salimbeni, H. and Deisenroth, M. P.},
+@book{Rasmussen2006,
+  title = {Gaussian Processes for Machine Learning},
+  author = {Rasmussen, Carl Edward and Williams, Christopher K. I.},
+  year = {2006},
+  publisher = {{MIT Press}},
+  address = {{Cambridge, Mass}},
+  language = {en},
+  lccn = {QA274.4 .R37 2006},
+  series = {Adaptive Computation and Machine Learning}
+}
+
+@article{Salimbeni2017a,
+  title = {Doubly {{Stochastic Variational Inference}} for {{Deep Gaussian Processes}}},
+  author = {Salimbeni, Hugh and Deisenroth, Marc},
   year = {2017},
-  abstract = {Abstract We propose a new Deep Gaussian Process (DGP) model, constructed from a hierarchy of non-stationary processes. In the standard DGP formulation, the output of one GP is the input to the next in the hierarchy. This construction can lead to undesirable properties such as exponential multimodality of the posterior, non-local correlations, and degeneracy. Instead, we use a non-stationary kernel for each layer, and use the Gaussian process of the previous layer to model the lengthscale. We apply recently proposed doubly},
-  file = {/home/nicegeek/Google Drive/Research_Hub/Salimbeni, Deisenroth - 2017 - Deeply Non-Stationary Gaussian Processes.pdf},
-  keywords = {⛔ No DOI found}
+  month = nov,
+  archiveprefix = {arXiv},
+  eprint = {1705.08933},
+  eprinttype = {arxiv},
+  journal = {ArXiv170508933 Stat},
+  primaryclass = {stat}
+}
+
+@inproceedings{Salimbeni2017b,
+  title = {Deeply Non-Stationary {{Gaussian}} Processes},
+  booktitle = {Proc. {{NIPS Workshop Bayesian Deep Learn}}.},
+  author = {Salimbeni, Hugh and Deisenroth, Marc Peter},
+  year = {2017}
 }
 
 @article{Sato2017,
@@ -332,29 +397,21 @@
   volume = {3},
   pages = {13--25},
   publisher = {{Institute of Electrical and Electronics Engineers (IEEE)}},
-  issn = {2332-7731},
   doi = {10.1109/tccn.2017.2653189},
-  abstract = {This paper proposes a probabilistic interference constraint method with a radio environment map (REM) for spatial spectrum sharing. The REM stores the spatial distribution of the average received signal power. We can optimize the accuracy of the measurement-based REM using the Kriging interpolation. Although several researchers have maintained a continuous interest in improving the accuracy of the REM, sufficient study has not been done to actually explore the interference constraint considering the estimation error. The proposed method uses ordinary Kriging interpolation for the spectrum cartography. According to the predicted distribution of the estimation error, the allowable interference power to the primary user is approximately formulated. Numerical results show that the proposed method can achieve the probabilistic interference constraint asymptotically. Additionally, we compare the performance of the proposed technique with three methods: the perfect estimation, the path loss-based method, and the Kriging-based method without the error prediction. The comparison results show that the proposed method has a higher spectrum sharing opportunity than the path loss-based method, even if only a small amount of measurement data is available. It is also shown that the proposed method dramatically improves the outage probability of the interference power compared to the conventional Kriging-based method.},
-  file = {/home/nicegeek/Google Drive/Research_Hub/Sato, Fujii - 2017 - Kriging-Based Interference Power Constraint Integrated Design of the Radio Environment Map and Transmission Power.pdf},
   journal = {IEEE Trans. on Cogn. Commun. Netw.},
-  keywords = {co-channel interference,Kriging,radio environment map,Spectrum sharing},
-  number = {1},
-  readstatus = {read}
+  number = {1}
 }
 
 @article{Sauer2020,
-  title = {Active Learning for Deep {{Gaussian}} Process Surrogates},
+  title = {Active Learning for Deep Gaussian Process Surrogates},
   author = {Sauer, Annie and Gramacy, Robert B. and Higdon, David},
   year = {2020},
   month = dec,
-  abstract = {Deep Gaussian processes (DGPs) are increasingly popular as predictive models in machine learning (ML) for their non-stationary flexibility and ability to cope with abrupt regime changes in training data. Here we explore DGPs as surrogates for computer simulation experiments whose response surfaces exhibit similar characteristics. In particular, we transport a DGP's automatic warping of the input space and full uncertainty quantification (UQ), via a novel elliptical slice sampling (ESS) Bayesian posterior inferential scheme, through to active learning (AL) strategies that distribute runs non-uniformly in the input space \textendash{} something an ordinary (stationary) GP could not do. Building up the design sequentially in this way allows smaller training sets, limiting both expensive evaluation of the simulator code and mitigating cubic costs of DGP inference. When training data sizes are kept small through careful acquisition, and with parsimonious layout of latent layers, the framework can be both effective and computationally tractable. Our methods are illustrated on simulation data and two real computer experiments of varying input dimensionality. We provide an open source implementation in the ``deepgp'' package on CRAN.},
   archiveprefix = {arXiv},
-  eid = {arXiv:2012.08015},
   eprint = {2012.08015},
   eprinttype = {arxiv},
-  file = {/home/nicegeek/Google Drive/Research_Hub/Sauer - 2020 - Active Learning for Deep Gaussian Process Surrogates.pdf},
-  keywords = {⛔ No DOI found,Statistics - Computation,Statistics - Machine Learning,Statistics - Methodology},
-  primaryclass = {stat.ME}
+  journal = {ArXiv201208015 Stat},
+  primaryclass = {stat}
 }
 
 @article{Ton2012,
@@ -363,52 +420,54 @@
   year = {2012},
   publisher = {{Community Resource for Archiving Wireless Data at Dartmouth (CRAWDAD)}},
   doi = {10.15783/C7BC76},
-  keywords = {802.16,Bit Error Characterization,Educational Use,Network Diagnosis,Network Performance Analysis,Wireless Networks},
-  language = {English},
-  readstatus = {read}
+  language = {English}
 }
 
-@article{Vu2020,
-  title = {Modeling Nonstationary and Asymmetric Multivariate Spatial Covariances via Deformations},
-  author = {Vu, Quan and {Zammit-Mangion}, Andrew and Cressie, Noel},
+@article{vanderWilk2020a,
+  title = {A {{Framework}} for {{Interdomain}} and {{Multioutput Gaussian Processes}}},
+  author = {{van der Wilk}, Mark and Dutordoir, Vincent and John, S. T. and Artemev, Artem and Adam, Vincent and Hensman, James},
   year = {2020},
-  month = apr,
-  abstract = {Multivariate spatial-statistical models are useful for modeling environmental and socio-demographic processes. The most commonly used models for multivariate spatial covariances assume both stationarity and symmetry for the cross-covariances, but these assumptions are rarely tenable in practice. In this article we introduce a new and highly flexible class of nonstationary and asymmetric multivariate spatial covariance models that are constructed by modeling the simpler and more familiar stationary and symmetric multivariate covariances on a warped domain. Inspired by recent developments in the univariate case, we propose modeling the warping function as a composition of a number of simple injective warping functions in a deep-learning framework. Importantly, covariance-model validity is guaranteed by construction. We establish the types of warpings that allow for symmetry and asymmetry, and we use likelihood-based methods for inference that are computationally efficient. The utility of this new class of models is shown through various data illustrations, including a simulation study on nonstationary data and an application on ocean temperatures at two different depths.},
+  month = mar,
   archiveprefix = {arXiv},
-  arxivid = {2004.08724},
+  eprint = {2003.01115},
+  eprinttype = {arxiv},
+  journal = {ArXiv200301115 Cs Stat},
+  primaryclass = {cs, stat}
+}
+
+@article{Vu2021,
+  title = {Modeling {{Nonstationary}} and {{Asymmetric Multivariate Spatial Covariances}} via {{Deformations}}},
+  author = {Vu, Quan and {Zammit-Mangion}, Andrew and Cressie, Noel},
+  year = {2021},
+  month = jan,
+  archiveprefix = {arXiv},
   eprint = {2004.08724},
   eprinttype = {arxiv},
-  file = {/home/nicegeek/Google Drive/Research_Hub/Vu, Zammit-Mangion, Cressie - 2020 - Modeling Nonstationary and Asymmetric Multivariate Spatial Covariances via Deformations.pdf},
-  keywords = {⛔ No DOI found,cross-covariance,deep learning,gaussian process,spatial statistics,warping}
+  journal = {ArXiv200408724 Stat},
+  primaryclass = {stat}
 }
 
-@inproceedings{Wilson2013,
-  title = {Gaussian Process Kernels for Pattern Discovery and Extrapolation},
-  booktitle = {30th {{ICML}}},
+@article{Wilson2013,
+  title = {Gaussian {{Process Kernels}} for {{Pattern Discovery}} and {{Extrapolation}}},
   author = {Wilson, Andrew Gordon and Adams, Ryan Prescott},
   year = {2013},
-  volume = {28},
-  pages = {2104--2112},
-  abstract = {Gaussian processes are rich distributions over functions, which provide a Bayesian nonparametric approach to smoothing and interpolation. We introduce simple closed form kernels that can be used with Gaussian processes to discover patterns and enable extrapolation. These kernels are derived by modelling a spectral density - the Fourier transform of a kernel - with a Gaussian mixture. The proposed kernels support a broad class of stationary covariances, but Gaussian process inference remains simple and analytic. We demonstrate the proposed kernels by discovering patterns and performing long range extrapolation on synthetic examples, as well as atmospheric CO2 trends and airline passenger data. We also show that it is possible to reconstruct several popular standard covariances within our framework. Copyright 2013 by the author(s).},
+  month = dec,
   archiveprefix = {arXiv},
-  arxivid = {1302.4245},
   eprint = {1302.4245},
   eprinttype = {arxiv},
-  file = {/home/nicegeek/Google Drive/Research_Hub/Wilson, Adams - 2013 - Gaussian process kernels for pattern discovery and extrapolation.pdf},
-  keywords = {⛔ No DOI found}
+  journal = {ArXiv13024245 Cs Stat},
+  primaryclass = {cs, stat}
 }
 
 @inproceedings{Wilson2019,
   title = {Deep Kernel Learning},
-  booktitle = {Proc. 19th {{AISTATS}}},
   author = {Wilson, Andrew Gordon and Hu, Zhiting and Salakhutdinov, Ruslan and Xing, Eric P.},
   year = {2019},
   month = nov,
   volume = {51},
   pages = {370--378},
-  abstract = {We introduce scalable deep kernels, which combine the structural properties of deep learning architectures with the non-parametric flexibility of kernel methods. Specifically, we transform the inputs of a spectral mixture base kernel with a deep architecture, using local kernel interpolation, inducing points, and structure exploiting (Kronecker and Toeplitz) algebra for a scalable kernel representation. These closed-form kernels can be used as drop-in replacements for standard kernels, with benefits in expressive power and scalability. We jointly learn the properties of these kernels through the marginal likelihood of a Gaussian process. Inference and learning cost \$O(n)\$ for \$n\$ training points, and predictions cost \$O(1)\$ per test point. On a large and diverse collection of applications, including a dataset with 2 million examples, we show improved performance over scalable Gaussian processes with flexible kernel learning models, and stand-alone deep architectures.},
   eprint = {1511.02222},
-  file = {/home/nicegeek/Google Drive/Research_Hub/Wilson et al. - 2015 - Deep Kernel Learning.pdf}
+  booktitle = {Proc. 19th {{AISTATS}}}
 }
 
 @article{Xu2021,
@@ -416,28 +475,21 @@
   author = {Xu, Yi-Qun and Zhang, Bangning and Ding, Guoru and Zhao, Bing and Li, Shengnan and Guo, Daoxing},
   year = {2021},
   pages = {1--13},
-  issn = {2332-7731, 2372-2045},
   doi = {10.1109/TCCN.2021.3066566},
-  annotation = {0 citations (Crossref) [2021-04-08]},
   copyright = {All rights reserved},
-  file = {/home/nicegeek/Google Drive/Research_Hub/Xu et al. - 2021 - Radio Environment Map Construction Based on Spatial Statistics and Bayesian Hierarchical Model.pdf},
-  journal = {IEEE Trans. Cogn. Commun. Netw.},
-  keywords = {⛔ No DOI found}
+  journal = {IEEE Trans. Cogn. Commun. Netw.}
 }
 
-@unpublished{Zammit-Mangion2019,
-  title = {Deep Compositional Spatial Models},
+@article{Zammit-Mangion2020,
+  title = {Deep {{Compositional Spatial Models}}},
   author = {{Zammit-Mangion}, Andrew and Ng, Tin Lok James and Vu, Quan and Filippone, Maurizio},
-  year = {2019},
-  abstract = {Spatial processes with nonstationary and anisotropic covariance structure are often used when modelling, analysing and predicting complex environmental phenomena. Such processes may often be expressed as ones that have stationary and isotropic covariance structure on a warped spatial domain. However, the warping function is generally difficult to fit and not constrained to be injective, often resulting in `space-folding.' Here, we propose modelling an injective warping function through a composition of multiple elemental injective functions in a deep-learning framework. We consider two cases; first, when these functions are known up to some weights that need to be estimated, and, second, when the weights in each layer are random. Inspired by recent methodological and technological advances in deep learning and deep Gaussian processes, we employ approximate Bayesian methods to make inference with these models using graphics processing units. Through simulation studies in one and two dimensions we show that the deep compositional spatial models are quick to fit, and are able to provide better predictions and uncertainty quantification than other deep stochastic models of similar complexity. We also show their remarkable capacity to model nonstationary, anisotropic spatial data using radiances from the MODIS instrument aboard the Aqua satellite.},
+  year = {2020},
+  month = apr,
   archiveprefix = {arXiv},
-  arxivid = {1906.02840},
   eprint = {1906.02840},
   eprinttype = {arxiv},
-  file = {/home/nicegeek/Google Drive/Research_Hub/Zammit-Mangion et al. - 2019 - Deep Compositional Spatial Models.pdf},
-  keywords = {deep models,nonstationarity,spatial statistics,stochastic processes,varia-},
-  priority = {prio1},
-  qualityassured = {qualityAssured}
+  journal = {ArXiv190602840 Stat},
+  primaryclass = {stat}
 }
 
 
